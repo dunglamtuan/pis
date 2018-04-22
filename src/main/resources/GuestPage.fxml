@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane prefHeight="392.0" prefWidth="527.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sk.stuba.fiit.scenes.GuestPageController">
+   <children>
+      <Pane layoutX="3.0" layoutY="53.0" prefHeight="332.0" prefWidth="520.0">
+         <children>
+            <TableView fx:id="cafes_table" layoutX="14.0" layoutY="14.0" prefHeight="292.0" prefWidth="182.0" />
+            <TextField fx:id="adresa_textfield" layoutX="323.0" layoutY="26.0" />
+            <TextField fx:id="average_rate_textfield" layoutX="323.0" layoutY="64.0" />
+            <TextArea fx:id="comment_textarea" layoutX="323.0" layoutY="94.0" prefHeight="132.0" prefWidth="149.0" />
+            <TextField fx:id="my_rate" layoutX="323.0" layoutY="234.0" />
+            <Button fx:id="send_rating_button" layoutX="340.0" layoutY="267.0" mnemonicParsing="false" text="Odosli hodnotenie" />
+            <Label layoutX="243.0" layoutY="30.0" text="Adresa" />
+            <Label layoutX="202.0" layoutY="68.0" text="Priemerne hodnotenie" />
+            <Label layoutX="235.0" layoutY="94.0" text="Komentar" />
+            <Label layoutX="219.0" layoutY="238.0" text="Moje odnotenie" />
+            <Label fx:id="info_label" layoutX="360.0" layoutY="298.0" text="Label" textFill="#eb0404" />
+         </children>
+      </Pane>
+      <Label layoutX="43.0" layoutY="26.0" prefHeight="27.0" prefWidth="136.0" text="Zoznam kaviarni" textFill="#05f815">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Label>
+   </children>
+</AnchorPane>

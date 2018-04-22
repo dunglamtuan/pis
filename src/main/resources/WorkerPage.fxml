@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane prefHeight="296.0" prefWidth="482.0" xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sk.stuba.fiit.scenes.WorkerPageController">
+   <children>
+      <Pane layoutX="76.0" layoutY="31.0" prefHeight="234.0" prefWidth="330.0">
+         <children>
+            <Button fx:id="registration_button" layoutX="76.0" layoutY="67.0" mnemonicParsing="false" prefHeight="35.0" prefWidth="206.0" text="Registracia" />
+            <Button fx:id="add_to_account_button" layoutX="76.0" layoutY="132.0" mnemonicParsing="false" prefHeight="35.0" prefWidth="206.0" text="Pridelenie na ucet" />
+            <Button fx:id="exit_button" layoutX="147.0" layoutY="185.0" mnemonicParsing="false" prefHeight="35.0" prefWidth="64.0" text="Exit" />
+            <Label layoutX="128.0" text="Vyber akcie" textFill="#e40101">
+               <font>
+                  <Font size="20.0" />
+               </font>
+            </Label>
+         </children>
+      </Pane>
+   </children>
+</AnchorPane>

@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.text.*?>
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+
+<AnchorPane prefHeight="400.0" prefWidth="746.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sk.stuba.fiit.scenes.CustomerPageController">
+   <children>
+      <Pane layoutX="14.0" layoutY="14.0" prefHeight="382.0" prefWidth="706.0">
+         <children>
+            <Label layoutX="93.0" layoutY="20.0" text="Moje kaviarne" textFill="#00f83e">
+               <font>
+                  <Font size="20.0" />
+               </font>
+            </Label>
+            <TableView fx:id="my_cofes_tableview" layoutX="14.0" layoutY="66.0" prefHeight="306.0" prefWidth="282.0" />
+            <TextField fx:id="adresa_textfield" layoutX="525.0" layoutY="86.0" />
+            <TextField fx:id="priemer_textfield" layoutX="525.0" layoutY="128.0" />
+            <TextField fx:id="mojehod_textfield" layoutX="525.0" layoutY="166.0" />
+            <Label layoutX="410.0" layoutY="90.0" text="Adresa" />
+            <Label layoutX="372.0" layoutY="132.0" text="Priermne hodnotenie" />
+            <Label layoutX="383.0" layoutY="170.0" text="MojeHodnotenie" />
+         </children>
+      </Pane>
+   </children>
+</AnchorPane>
