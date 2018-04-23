@@ -23,9 +23,9 @@
                   <Font size="22.0" />
                </font>
             </Label>
-            <Label layoutX="42.0" layoutY="60.0" text="Name" />
+            <Label layoutX="42.0" layoutY="60.0" text="Meno" />
             <Label layoutX="42.0" layoutY="102.0" text="Email" />
-            <Label layoutX="42.0" layoutY="146.0" text="CardId" />
+            <Label layoutX="42.0" layoutY="146.0" text="Cislo karty" />
             <Button fx:id="registration_button" layoutX="119.0" layoutY="225.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="88.0" text="Registruj" />
             <TextField fx:id="pass_textfield" layoutX="130.0" layoutY="186.0" />
             <Label layoutX="41.0" layoutY="190.0" text="Heslo" />

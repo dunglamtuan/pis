@@ -15,6 +15,7 @@ import javafx.stage.Stage;
 import sk.stuba.fiit.labss2.pis.students.team076hodnotenie.Team076HodnoteniePortType;
 import sk.stuba.fiit.labss2.pis.students.team076hodnotenie.Team076HodnotenieService;
 import sk.stuba.fiit.labss2.pis.students.team076hodnotenie.types.ArrayOfHodnotenies;
+import sk.stuba.fiit.labss2.pis.students.team076hodnotenie.types.Hodnotenie;
 import sk.stuba.fiit.labss2.pis.students.team076hodnotenie.types.Hodnotenies;
 import sk.stuba.fiit.labss2.pis.students.team076kaviaren.Team076KaviarenPortType;
 import sk.stuba.fiit.labss2.pis.students.team076kaviaren.Team076KaviarenService;
@@ -45,6 +46,9 @@ public class CustomerPageController {
 
     @FXML
     Button back_button;
+
+    @FXML
+    Button change_rate_button;
 
     @FXML
     private void initialize(){
@@ -79,6 +83,11 @@ public class CustomerPageController {
                 }
             });
             return row ;
+        });
+
+        change_rate_button.setOnMouseClicked(event -> {
+            int rating = Integer.valueOf(mojehod_textfield.getText());
+            updateMyRating(rating);
         });
 
         back_button.setOnMouseClicked(event -> {
@@ -121,6 +130,39 @@ public class CustomerPageController {
         }
 
         return result;
+    }
+
+    public void updateMyRating(int myInputRating){
+        Team076HodnotenieService hodnotenieService = new Team076HodnotenieService();
+        Team076HodnoteniePortType hodnoteniePort = hodnotenieService.getTeam076HodnoteniePort();
+        ArrayOfHodnotenies kaviaren_id = hodnoteniePort.getAll();
+        List<Hodnotenies> hodnotenia = kaviaren_id.getHodnoteny();
+        List<Hodnotenies> myRating = hodnotenia.stream()
+                .filter(item -> item.getZakaznikId() == this.userid)
+                .collect(Collectors.toList());
+
+        Hodnotenie hodnotenie;
+        if (myRating.isEmpty()){
+            hodnotenie = new Hodnotenie();
+            hodnotenie.setName("");
+            hodnotenie.setKaviarenId(cafe_id);
+            hodnotenie.setHodnota(myInputRating);
+            hodnotenie.setBoloVidene(false);
+            hodnotenie.setZakaznikId(this.userid);
+
+            hodnoteniePort.insert("076", "GS3kMb", hodnotenie);
+        } else {
+            Hodnotenies myCurrentRating = myRating.get(0);
+            hodnotenie = new Hodnotenie();
+            hodnotenie.setName("");
+            hodnotenie.setKaviarenId(myCurrentRating.getKaviarenId());
+            hodnotenie.setHodnota(myCurrentRating.getHodnota());
+            hodnotenie.setBoloVidene(false);
+            hodnotenie.setZakaznikId(myCurrentRating.getZakaznikId());
+            myCurrentRating.setHodnota(myInputRating);
+            hodnoteniePort.update("076", "GS3kMb", myCurrentRating.getId(), hodnotenie);
+        }
+
     }
 
     public static class MyTableData{
