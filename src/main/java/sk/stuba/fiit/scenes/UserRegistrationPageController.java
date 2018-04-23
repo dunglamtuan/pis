@@ -11,11 +11,15 @@ import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import sk.stuba.fiit.labss2.pis.students.team076zakaznik.Team076ZakaznikPortType;
 import sk.stuba.fiit.labss2.pis.students.team076zakaznik.Team076ZakaznikService;
+import sk.stuba.fiit.labss2.pis.students.team076zakaznik.types.ArrayOfZakazniks;
 import sk.stuba.fiit.labss2.pis.students.team076zakaznik.types.Zakaznik;
+import sk.stuba.fiit.labss2.pis.students.team076zakaznik.types.Zakazniks;
 import sk.stuba.fiit.labss2.pis.validator.ValidatorPortType;
 import sk.stuba.fiit.labss2.pis.validator.ValidatorService;
 
 import java.io.IOException;
+import java.util.List;
+import java.util.stream.Collectors;
 
 public class UserRegistrationPageController {
 
@@ -57,9 +61,14 @@ public class UserRegistrationPageController {
             String cardd_input = cardid_textfield.getText();
             String pass = pass_textfield.getText();
 
-            if (!validateEmailInput(email_input))
+            if (!validateEmailInput(email_input)){
+                mail_error_label.setText("Neplatna emailova adresa");
                 mail_error_label.setVisible(true);
-            else {
+            }
+            else if (isCardIdExisted(Integer.valueOf(cardd_input))){
+                mail_error_label.setText("Cislo karty uz existuje");
+                mail_error_label.setVisible(true);
+            } else {
                 registerNewUser(nameInput, email_input, cardd_input, pass);
 
                 String fxmlPath = "/WorkerPage.fxml";
@@ -114,6 +123,23 @@ public class UserRegistrationPageController {
         ValidatorPortType port = service.getValidatorPort();
 
         return port.validateEmail(email);
+    }
+
+    private boolean isCardIdExisted(int cardId) {
+        Team076ZakaznikService service = new Team076ZakaznikService();
+        Team076ZakaznikPortType port = service.getTeam076ZakaznikPort();
+
+        ArrayOfZakazniks all = port.getAll();
+        List<Zakazniks> zakaznikList = all.getZakaznik();
+
+        List<Zakazniks> collect = zakaznikList
+                .stream()
+                .filter(item -> item.getCisloKarty() == cardId)
+                .collect(Collectors.toList());
+        if (collect.isEmpty())
+            return false;
+        else
+            return true;
     }
 
     public void setCafeid(int cafeid) {
