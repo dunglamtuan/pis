@@ -64,7 +64,6 @@ public class AddToCardPageController {
             navsteva.setName("");
             navsteva.setKaviarenId(this.kaviarenId);
             navsteva.setPocetNavstev(1);
-            //TODO - set navstevnik id
             navsteva.setZakaznikId(Integer.valueOf(cardid));
 
             port.insert("076", "GS3kMb", navsteva);

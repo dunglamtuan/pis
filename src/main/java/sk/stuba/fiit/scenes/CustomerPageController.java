@@ -56,18 +56,25 @@ public class CustomerPageController {
         adresa_textfield.setEditable(false);
         priemer_textfield.setEditable(false);
 
+        TableColumn name_column = new TableColumn("Meno");
+        name_column.setPrefWidth(my_cofes_tableview.getPrefWidth()/4);
+        name_column.setCellValueFactory(new PropertyValueFactory<MyTableData, String>("name"));
+
         TableColumn adresa_column = new TableColumn("Adresa");
+        adresa_column.setPrefWidth(my_cofes_tableview.getPrefWidth()/4);
         adresa_column.setCellValueFactory(new PropertyValueFactory<MyTableData, String>("adresa"));
 
         TableColumn rate_column = new TableColumn("Priemerne hodnotenie");
+        rate_column.setPrefWidth(my_cofes_tableview.getPrefWidth()/4);
         rate_column.setCellValueFactory(new PropertyValueFactory<MyTableData, String>("hodnotenie"));
 
         TableColumn my_rate_column = new TableColumn("Moje hodnotenie");
+        my_rate_column.setPrefWidth(my_cofes_tableview.getPrefWidth()/4);
         rate_column.setCellValueFactory(new PropertyValueFactory<MyTableData, String>("mojeHodnotenie"));
 
         //ObservableList<TableData> result = FXCollections.observableArrayList(new TableData("0", "asdasd"));
         my_cofes_tableview.setItems(getTableDate());
-        my_cofes_tableview.getColumns().addAll(adresa_column, rate_column, my_rate_column);
+        my_cofes_tableview.getColumns().addAll(name_column, adresa_column, rate_column, my_rate_column);
 
         my_cofes_tableview.setRowFactory(tv -> {
             TableRow<MyTableData> row = new TableRow();
@@ -124,15 +131,14 @@ public class CustomerPageController {
             if (collect.size()>0)
                 average = (double) sum / collect.size();
 
-
-            result.add(new MyTableData(String.valueOf(kaviaren.getId()), kaviaren.getAdresa(),
+            result.add(new MyTableData(String.valueOf(kaviaren.getId()), kaviaren.getName(), kaviaren.getAdresa(),
                     String.valueOf(average), String.valueOf(mojeHodnotenie)));
         }
 
         return result;
     }
 
-    public void updateMyRating(int myInputRating){
+    private void updateMyRating(int myInputRating){
         Team076HodnotenieService hodnotenieService = new Team076HodnotenieService();
         Team076HodnoteniePortType hodnoteniePort = hodnotenieService.getTeam076HodnoteniePort();
         ArrayOfHodnotenies kaviaren_id = hodnoteniePort.getAll();
@@ -168,12 +174,14 @@ public class CustomerPageController {
     public static class MyTableData{
 
         private final SimpleStringProperty id;
-        private final SimpleStringProperty  adresa;
-        private final SimpleStringProperty  hodnotenie;
-        private final SimpleStringProperty  mojeHodnotenie;
+        private final SimpleStringProperty name;
+        private final SimpleStringProperty adresa;
+        private final SimpleStringProperty hodnotenie;
+        private final SimpleStringProperty mojeHodnotenie;
 
-        MyTableData(String id, String adresa, String hodnotenie, String mojehod) {
+        MyTableData(String id, String name, String adresa, String hodnotenie, String mojehod) {
             this.id = new SimpleStringProperty(id);
+            this.name = new SimpleStringProperty(name);
             this.adresa = new SimpleStringProperty(adresa);
             this.hodnotenie = new SimpleStringProperty(hodnotenie);
             this.mojeHodnotenie = new SimpleStringProperty(mojehod);
@@ -185,6 +193,14 @@ public class CustomerPageController {
 
         public void setId(String id) {
             this.id.set(id);
+        }
+
+        public String getName(){
+            return name.get();
+        }
+
+        public void setName(String name){
+            this.name.set(name);
         }
 
         public String getAdresa() {
