@@ -11,16 +11,24 @@ import javafx.scene.control.Button;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import sk.stuba.fiit.labss2.pis.students.team076hodnotenie.Team076HodnoteniePortType;
 import sk.stuba.fiit.labss2.pis.students.team076hodnotenie.Team076HodnotenieService;
 import sk.stuba.fiit.labss2.pis.students.team076hodnotenie.types.ArrayOfHodnotenies;
+import sk.stuba.fiit.labss2.pis.students.team076hodnotenie.types.ArrayOfIds;
 import sk.stuba.fiit.labss2.pis.students.team076hodnotenie.types.Hodnotenies;
 import sk.stuba.fiit.labss2.pis.students.team076kaviaren.Team076KaviarenPortType;
 import sk.stuba.fiit.labss2.pis.students.team076kaviaren.Team076KaviarenService;
 import sk.stuba.fiit.labss2.pis.students.team076kaviaren.types.ArrayOfKaviarens;
+import sk.stuba.fiit.labss2.pis.students.team076kaviaren.types.Kaviaren;
 import sk.stuba.fiit.labss2.pis.students.team076kaviaren.types.Kaviarens;
+import sk.stuba.fiit.labss2.pis.students.team076majitel.Team076MajitelPortType;
+import sk.stuba.fiit.labss2.pis.students.team076majitel.Team076MajitelService;
+import sk.stuba.fiit.labss2.pis.students.team076zakaznik.Team076ZakaznikPortType;
+import sk.stuba.fiit.labss2.pis.students.team076zakaznik.Team076ZakaznikService;
+import sk.stuba.fiit.labss2.pis.students.team076zakaznik.types.Zakaznik;
 
 import java.io.IOException;
 import java.util.List;
@@ -32,10 +40,10 @@ public class AdminPageController {
     Button notification_setting_button;
 
     @FXML
-    TableView cafes_tableview;
+    TableView<AllTableData> cafes_tableview;
 
     @FXML
-    TableView notification_tableview;
+    TableView<NotificationData> notification_tableview;
 
     @FXML
     TextField average_textfield;
@@ -53,19 +61,24 @@ public class AdminPageController {
 
         TableColumn name_column = new TableColumn("Meno");
         name_column.setPrefWidth(cafes_tableview.getPrefWidth()/3);
+        name_column.setCellValueFactory(new PropertyValueFactory<AllTableData, String>("name"));
 
         TableColumn adress_column = new TableColumn("Adresa");
         adress_column.setPrefWidth(cafes_tableview.getPrefWidth()/3);
+        adress_column.setCellValueFactory(new PropertyValueFactory<AllTableData, String>("adresa"));
 
         TableColumn average_column = new TableColumn("Priemerne hodnotenie");
         average_column.setPrefWidth(cafes_tableview.getPrefWidth()/3);
+        average_column.setCellValueFactory(new PropertyValueFactory<AllTableData, String>("hodnotenie"));
 
         cafes_tableview.setItems(getTableDate());
         cafes_tableview.getColumns().addAll(name_column, adress_column, average_column);
 
+        initNotificationTable();
+
     }
 
-    ObservableList<TableData> getTableDate(){
+    private ObservableList<AllTableData> getTableDate(){
         Team076KaviarenService service = new Team076KaviarenService();
         Team076KaviarenPortType port = service.getTeam076KaviarenPort();
         ArrayOfKaviarens allKaviaren = port.getAll();
@@ -76,7 +89,7 @@ public class AdminPageController {
         ArrayOfHodnotenies kaviaren_id = hodnoteniePort.getAll();
         List<Hodnotenies> hodnotenia = kaviaren_id.getHodnoteny();
 
-        ObservableList<TableData> result = FXCollections.observableArrayList();
+        ObservableList<AllTableData> result = FXCollections.observableArrayList();
         for (Kaviarens kaviaren : listKaviaren) {
             List<Hodnotenies> collect = hodnotenia.stream()
                     .filter(item -> item.getKaviarenId() == kaviaren.getId())
@@ -86,20 +99,23 @@ public class AdminPageController {
             if (collect.size()>0)
                 average = (double) sum / collect.size();
 
-            result.add(new TableData(String.valueOf(kaviaren.getId()), kaviaren.getAdresa(), String.valueOf(average)));
+            result.add(new AllTableData(String.valueOf(kaviaren.getId()), kaviaren.getName(),
+                    kaviaren.getAdresa(), String.valueOf(average)));
         }
 
         return result;
     }
 
-    public static class TableData{
+    public static class AllTableData{
 
         private final SimpleStringProperty id;
+        private final SimpleStringProperty name;
         private final SimpleStringProperty  adresa;
         private final SimpleStringProperty  hodnotenie;
 
-        TableData(String id, String adresa, String hodnotenie) {
+        AllTableData(String id, String name, String adresa, String hodnotenie) {
             this.id = new SimpleStringProperty(id);
+            this.name = new SimpleStringProperty(name);
             this.adresa = new SimpleStringProperty(adresa);
             this.hodnotenie = new SimpleStringProperty(hodnotenie);
         }
@@ -111,6 +127,10 @@ public class AdminPageController {
         public void setId(String id) {
             this.id.set(id);
         }
+
+        public String getName() { return name.get();}
+
+        public void setName(String name) { this.name.set(name);}
 
         public String getAdresa() {
             return adresa.get();
@@ -126,6 +146,109 @@ public class AdminPageController {
 
         public void setHodnotenie(String hodnotenie) {
             this.hodnotenie.set(hodnotenie);
+        }
+    }
+
+    private void initNotificationTable(){
+        TableColumn cafe_name_column = new TableColumn("Meno");
+        cafe_name_column.setPrefWidth(notification_tableview.getPrefWidth()/4);
+        cafe_name_column.setCellValueFactory(new PropertyValueFactory<NotificationData, String>("cafeName"));
+
+        TableColumn customer_name_column = new TableColumn("Zakaznik");
+        customer_name_column.setPrefWidth(notification_tableview.getPrefWidth()/4);
+        customer_name_column.setCellValueFactory(new PropertyValueFactory<NotificationData, String>("customerName"));
+
+        TableColumn rate_column = new TableColumn("Hodnota");
+        rate_column.setPrefWidth(notification_tableview.getPrefWidth()/4);
+        rate_column.setCellValueFactory(new PropertyValueFactory<NotificationData, String>("rate"));
+
+        TableColumn add_date_column = new TableColumn("Datum");
+        add_date_column.setPrefWidth(notification_tableview.getPrefWidth()/4);
+        add_date_column.setCellValueFactory(new PropertyValueFactory<NotificationData, String>("date"));
+
+        notification_tableview.setItems(getTableNotifications());
+        notification_tableview.getColumns().addAll(cafe_name_column, customer_name_column, rate_column, add_date_column);
+
+
+    }
+
+    private ObservableList<NotificationData> getTableNotifications(){
+        Team076MajitelService majitelService = new Team076MajitelService();
+        Team076MajitelPortType majitelPort = majitelService.getTeam076MajitelPort();
+
+        Team076HodnotenieService hodnotenieService = new Team076HodnotenieService();
+        Team076HodnoteniePortType hodnoteniePort = hodnotenieService.getTeam076HodnoteniePort();
+
+        Team076ZakaznikService zakaznikService = new Team076ZakaznikService();
+        Team076ZakaznikPortType zakaznikPort = zakaznikService.getTeam076ZakaznikPort();
+
+        Team076KaviarenService kaviarenService = new Team076KaviarenService();
+        Team076KaviarenPortType kaviarenPort = kaviarenService.getTeam076KaviarenPort();
+
+        if (!majitelPort.getAll().getMajitel().get(0).isNotifikacia())
+            return null;
+        ObservableList<NotificationData> result = FXCollections.observableArrayList();
+        //ArrayOfHodnotenies notSeenH = hodnoteniePort.getByAttributeValue("bolo_videne", "false", new ArrayOfIds());
+        ArrayOfHodnotenies all = hodnoteniePort.getAll();
+        List<Hodnotenies> notSeenList = all.getHodnoteny().stream()
+                .filter(item -> !item.isBoloVidene() && majitelPort.getAll().getMajitel().get(0).getHodnotaNotifikacie() >= item.getHodnota())
+                .collect(Collectors.toList());
+
+        System.out.println("Size of hodnotenia: " + notSeenList.size());
+        for (Hodnotenies hodnotenies : notSeenList) {
+            Zakaznik zakaznik = zakaznikPort.getById(hodnotenies.getZakaznikId());
+            Kaviaren kaviaren = kaviarenPort.getById(hodnotenies.getKaviarenId());
+
+            result.add(new NotificationData(kaviaren.getName(), zakaznik.getName(),
+                    String.valueOf(hodnotenies.getHodnota()),String.valueOf(hodnotenies.getDatumPridania())));
+        }
+
+        return result;
+    }
+
+    public static class NotificationData{
+        private final SimpleStringProperty cafeName;
+        private final SimpleStringProperty customerName;
+        private final SimpleStringProperty rate;
+        private final SimpleStringProperty date;
+
+        public NotificationData(String cafeName, String customerName, String rate, String date) {
+            this.cafeName = new SimpleStringProperty(cafeName);
+            this.customerName = new SimpleStringProperty(customerName);
+            this.rate = new SimpleStringProperty(rate);
+            this.date = new SimpleStringProperty(date);
+        }
+
+        public String getCafeName() {
+            return cafeName.get();
+        }
+
+        public void setCafeName(String cafeName) {
+            this.cafeName.set(cafeName);
+        }
+
+        public String getCustomerName() {
+            return customerName.get();
+        }
+
+        public void setCustomerName(String customerName) {
+            this.customerName.set(customerName);
+        }
+
+        public String getRate() {
+            return rate.get();
+        }
+
+        public void setRate(String rate) {
+            this.rate.set(rate);
+        }
+
+        public String getDate() {
+            return date.get();
+        }
+
+        public void setDate(String date) {
+            this.date.set(date);
         }
     }
 
