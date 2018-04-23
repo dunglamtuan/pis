@@ -49,38 +49,6 @@ public class ObjectFactory {
     }
 
     /**
-     * Create an instance of {@link GetAll }
-     * 
-     */
-    public GetAll createGetAll() {
-        return new GetAll();
-    }
-
-    /**
-     * Create an instance of {@link GetByAttributeValue }
-     * 
-     */
-    public GetByAttributeValue createGetByAttributeValue() {
-        return new GetByAttributeValue();
-    }
-
-    /**
-     * Create an instance of {@link Insert }
-     * 
-     */
-    public Insert createInsert() {
-        return new Insert();
-    }
-
-    /**
-     * Create an instance of {@link GetByIdResponse }
-     * 
-     */
-    public GetByIdResponse createGetByIdResponse() {
-        return new GetByIdResponse();
-    }
-
-    /**
      * Create an instance of {@link Update }
      * 
      */
@@ -89,11 +57,11 @@ public class ObjectFactory {
     }
 
     /**
-     * Create an instance of {@link ArrayOfIds }
+     * Create an instance of {@link Zlavas }
      * 
      */
-    public ArrayOfIds createArrayOfIds() {
-        return new ArrayOfIds();
+    public Zlavas createZlavas() {
+        return new Zlavas();
     }
 
     /**
@@ -105,27 +73,35 @@ public class ObjectFactory {
     }
 
     /**
-     * Create an instance of {@link GetByAttributeValueResponse }
+     * Create an instance of {@link GetByIdResponse }
      * 
      */
-    public GetByAttributeValueResponse createGetByAttributeValueResponse() {
-        return new GetByAttributeValueResponse();
+    public GetByIdResponse createGetByIdResponse() {
+        return new GetByIdResponse();
     }
 
     /**
-     * Create an instance of {@link GetByNumericCondition }
+     * Create an instance of {@link UpdateResponse }
      * 
      */
-    public GetByNumericCondition createGetByNumericCondition() {
-        return new GetByNumericCondition();
+    public UpdateResponse createUpdateResponse() {
+        return new UpdateResponse();
     }
 
     /**
-     * Create an instance of {@link GetByNumericConditionResponse }
+     * Create an instance of {@link Insert }
      * 
      */
-    public GetByNumericConditionResponse createGetByNumericConditionResponse() {
-        return new GetByNumericConditionResponse();
+    public Insert createInsert() {
+        return new Insert();
+    }
+
+    /**
+     * Create an instance of {@link GetByAttributeValue }
+     * 
+     */
+    public GetByAttributeValue createGetByAttributeValue() {
+        return new GetByAttributeValue();
     }
 
     /**
@@ -145,35 +121,35 @@ public class ObjectFactory {
     }
 
     /**
+     * Create an instance of {@link ArrayOfIds }
+     * 
+     */
+    public ArrayOfIds createArrayOfIds() {
+        return new ArrayOfIds();
+    }
+
+    /**
+     * Create an instance of {@link GetById }
+     * 
+     */
+    public GetById createGetById() {
+        return new GetById();
+    }
+
+    /**
+     * Create an instance of {@link GetByAttributeValueResponse }
+     * 
+     */
+    public GetByAttributeValueResponse createGetByAttributeValueResponse() {
+        return new GetByAttributeValueResponse();
+    }
+
+    /**
      * Create an instance of {@link ArrayOfZlavas }
      * 
      */
     public ArrayOfZlavas createArrayOfZlavas() {
         return new ArrayOfZlavas();
-    }
-
-    /**
-     * Create an instance of {@link InsertResponse }
-     * 
-     */
-    public InsertResponse createInsertResponse() {
-        return new InsertResponse();
-    }
-
-    /**
-     * Create an instance of {@link Zlavas }
-     * 
-     */
-    public Zlavas createZlavas() {
-        return new Zlavas();
-    }
-
-    /**
-     * Create an instance of {@link UpdateResponse }
-     * 
-     */
-    public UpdateResponse createUpdateResponse() {
-        return new UpdateResponse();
     }
 
     /**
@@ -185,11 +161,35 @@ public class ObjectFactory {
     }
 
     /**
-     * Create an instance of {@link GetById }
+     * Create an instance of {@link GetByNumericCondition }
      * 
      */
-    public GetById createGetById() {
-        return new GetById();
+    public GetByNumericCondition createGetByNumericCondition() {
+        return new GetByNumericCondition();
+    }
+
+    /**
+     * Create an instance of {@link InsertResponse }
+     * 
+     */
+    public InsertResponse createInsertResponse() {
+        return new InsertResponse();
+    }
+
+    /**
+     * Create an instance of {@link GetAll }
+     * 
+     */
+    public GetAll createGetAll() {
+        return new GetAll();
+    }
+
+    /**
+     * Create an instance of {@link GetByNumericConditionResponse }
+     * 
+     */
+    public GetByNumericConditionResponse createGetByNumericConditionResponse() {
+        return new GetByNumericConditionResponse();
     }
 
     /**

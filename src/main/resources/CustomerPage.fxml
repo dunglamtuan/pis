@@ -7,10 +7,9 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-
-<AnchorPane prefHeight="400.0" prefWidth="746.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sk.stuba.fiit.scenes.CustomerPageController">
+<AnchorPane prefHeight="446.0" prefWidth="746.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sk.stuba.fiit.scenes.CustomerPageController">
    <children>
-      <Pane layoutX="14.0" layoutY="14.0" prefHeight="382.0" prefWidth="706.0">
+      <Pane layoutX="14.0" layoutY="14.0" prefHeight="406.0" prefWidth="706.0">
          <children>
             <Label layoutX="93.0" layoutY="20.0" text="Moje kaviarne" textFill="#00f83e">
                <font>
@@ -24,6 +23,7 @@
             <Label layoutX="410.0" layoutY="90.0" text="Adresa" />
             <Label layoutX="372.0" layoutY="132.0" text="Priermne hodnotenie" />
             <Label layoutX="383.0" layoutY="170.0" text="MojeHodnotenie" />
+            <Button fx:id="back_button" layoutX="14.0" layoutY="380.0" mnemonicParsing="false" text="Spat" />
          </children>
       </Pane>
    </children>

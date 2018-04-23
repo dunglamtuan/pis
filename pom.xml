@@ -54,6 +54,9 @@
                         <wsdlUrl>
                             http://labss2.fiit.stuba.sk/pis/ws/Students/Team076Navsteva?WSDL
                         </wsdlUrl>
+                        <wsdlUrl>
+                            http://labss2.fiit.stuba.sk/pis/ws/Validator?WSDL
+                        </wsdlUrl>
                     </wsdlUrls>
                 </configuration>
             </plugin>

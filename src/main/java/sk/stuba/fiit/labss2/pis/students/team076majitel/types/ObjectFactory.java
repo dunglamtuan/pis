@@ -57,19 +57,83 @@ public class ObjectFactory {
     }
 
     /**
-     * Create an instance of {@link ArrayOfMajitels }
+     * Create an instance of {@link Update }
      * 
      */
-    public ArrayOfMajitels createArrayOfMajitels() {
-        return new ArrayOfMajitels();
+    public Update createUpdate() {
+        return new Update();
     }
 
     /**
-     * Create an instance of {@link GetAllResponse }
+     * Create an instance of {@link UpdateResponse }
      * 
      */
-    public GetAllResponse createGetAllResponse() {
-        return new GetAllResponse();
+    public UpdateResponse createUpdateResponse() {
+        return new UpdateResponse();
+    }
+
+    /**
+     * Create an instance of {@link ArrayOfIds }
+     * 
+     */
+    public ArrayOfIds createArrayOfIds() {
+        return new ArrayOfIds();
+    }
+
+    /**
+     * Create an instance of {@link GetByNumericCondition }
+     * 
+     */
+    public GetByNumericCondition createGetByNumericCondition() {
+        return new GetByNumericCondition();
+    }
+
+    /**
+     * Create an instance of {@link DeleteResponse }
+     * 
+     */
+    public DeleteResponse createDeleteResponse() {
+        return new DeleteResponse();
+    }
+
+    /**
+     * Create an instance of {@link Delete }
+     * 
+     */
+    public Delete createDelete() {
+        return new Delete();
+    }
+
+    /**
+     * Create an instance of {@link Majitels }
+     * 
+     */
+    public Majitels createMajitels() {
+        return new Majitels();
+    }
+
+    /**
+     * Create an instance of {@link GetById }
+     * 
+     */
+    public GetById createGetById() {
+        return new GetById();
+    }
+
+    /**
+     * Create an instance of {@link Majitel }
+     * 
+     */
+    public Majitel createMajitel() {
+        return new Majitel();
+    }
+
+    /**
+     * Create an instance of {@link GetByAttributeValue }
+     * 
+     */
+    public GetByAttributeValue createGetByAttributeValue() {
+        return new GetByAttributeValue();
     }
 
     /**
@@ -97,27 +161,19 @@ public class ObjectFactory {
     }
 
     /**
-     * Create an instance of {@link Update }
+     * Create an instance of {@link ArrayOfMajitels }
      * 
      */
-    public Update createUpdate() {
-        return new Update();
+    public ArrayOfMajitels createArrayOfMajitels() {
+        return new ArrayOfMajitels();
     }
 
     /**
-     * Create an instance of {@link Majitel }
+     * Create an instance of {@link GetAllResponse }
      * 
      */
-    public Majitel createMajitel() {
-        return new Majitel();
-    }
-
-    /**
-     * Create an instance of {@link GetById }
-     * 
-     */
-    public GetById createGetById() {
-        return new GetById();
+    public GetAllResponse createGetAllResponse() {
+        return new GetAllResponse();
     }
 
     /**
@@ -129,67 +185,11 @@ public class ObjectFactory {
     }
 
     /**
-     * Create an instance of {@link GetByNumericCondition }
-     * 
-     */
-    public GetByNumericCondition createGetByNumericCondition() {
-        return new GetByNumericCondition();
-    }
-
-    /**
-     * Create an instance of {@link Majitels }
-     * 
-     */
-    public Majitels createMajitels() {
-        return new Majitels();
-    }
-
-    /**
-     * Create an instance of {@link ArrayOfIds }
-     * 
-     */
-    public ArrayOfIds createArrayOfIds() {
-        return new ArrayOfIds();
-    }
-
-    /**
-     * Create an instance of {@link Delete }
-     * 
-     */
-    public Delete createDelete() {
-        return new Delete();
-    }
-
-    /**
-     * Create an instance of {@link DeleteResponse }
-     * 
-     */
-    public DeleteResponse createDeleteResponse() {
-        return new DeleteResponse();
-    }
-
-    /**
-     * Create an instance of {@link GetByAttributeValue }
-     * 
-     */
-    public GetByAttributeValue createGetByAttributeValue() {
-        return new GetByAttributeValue();
-    }
-
-    /**
      * Create an instance of {@link GetByIdResponse }
      * 
      */
     public GetByIdResponse createGetByIdResponse() {
         return new GetByIdResponse();
-    }
-
-    /**
-     * Create an instance of {@link UpdateResponse }
-     * 
-     */
-    public UpdateResponse createUpdateResponse() {
-        return new UpdateResponse();
     }
 
     /**

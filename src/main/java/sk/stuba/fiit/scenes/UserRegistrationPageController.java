@@ -1,13 +1,25 @@
 package sk.stuba.fiit.scenes;
 
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.scene.layout.AnchorPane;
+import javafx.stage.Stage;
 import sk.stuba.fiit.labss2.pis.students.team076zakaznik.Team076ZakaznikPortType;
 import sk.stuba.fiit.labss2.pis.students.team076zakaznik.Team076ZakaznikService;
 import sk.stuba.fiit.labss2.pis.students.team076zakaznik.types.Zakaznik;
+import sk.stuba.fiit.labss2.pis.validator.ValidatorPortType;
+import sk.stuba.fiit.labss2.pis.validator.ValidatorService;
+
+import java.io.IOException;
 
 public class UserRegistrationPageController {
+
+    private int cafeid;
 
     @FXML
     TextField name_textfield;
@@ -22,10 +34,22 @@ public class UserRegistrationPageController {
     Button registration_button;
 
     @FXML
+    Button back_button;
+
+    @FXML
     TextField pass_textfield;
 
     @FXML
+    Label mail_error_label;
+
+    @FXML
     private void initialize(){
+
+        mail_error_label.setVisible(false);
+
+        email_textfield.textProperty().addListener((observable, oldValue, newValue) -> {
+            mail_error_label.setVisible(false);
+        });
 
         registration_button.setOnMouseClicked(event ->{
             String nameInput =  name_textfield.getText();
@@ -33,7 +57,19 @@ public class UserRegistrationPageController {
             String cardd_input = cardid_textfield.getText();
             String pass = pass_textfield.getText();
 
-            registerNewUser(nameInput, email_input, cardd_input, pass);
+            if (!validateEmailInput(email_input))
+                mail_error_label.setVisible(true);
+            else {
+                registerNewUser(nameInput, email_input, cardd_input, pass);
+
+                String fxmlPath = "/WorkerPage.fxml";
+                creteNewWindow(fxmlPath);
+            }
+        });
+
+        back_button.setOnMouseClicked(event -> {
+            String fxmlPath = "/WorkerPage.fxml";
+            creteNewWindow(fxmlPath);
         });
     }
 
@@ -49,4 +85,38 @@ public class UserRegistrationPageController {
         port.insert("076", "GS3kMb", zakaznik);
     }
 
+    private void creteNewWindow(String fxmlPath) {
+        FXMLLoader loader = new FXMLLoader();
+        loader.setLocation(getClass().getResource(fxmlPath));
+
+        try {
+            Parent parent = (Parent) loader.load();
+
+            WorkerPageController controller = loader.<WorkerPageController>getController();
+            System.out.println("Contains worker");
+            controller.setCafeid(this.cafeid);
+
+
+            AnchorPane root = (AnchorPane) parent;
+            Stage stage = new Stage();
+            Scene scene = new Scene(root);
+            stage.setScene(scene);
+            stage.show();
+            Stage s = (Stage) registration_button.getScene().getWindow();
+            s.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    private boolean validateEmailInput(String email){
+        ValidatorService service = new ValidatorService();
+        ValidatorPortType port = service.getValidatorPort();
+
+        return port.validateEmail(email);
+    }
+
+    public void setCafeid(int cafeid) {
+        this.cafeid = cafeid;
+    }
 }

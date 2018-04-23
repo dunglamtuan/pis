@@ -4,12 +4,17 @@ import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableRow;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseButton;
+import javafx.scene.layout.AnchorPane;
+import javafx.stage.Stage;
 import sk.stuba.fiit.labss2.pis.students.team076hodnotenie.Team076HodnoteniePortType;
 import sk.stuba.fiit.labss2.pis.students.team076hodnotenie.Team076HodnotenieService;
 import sk.stuba.fiit.labss2.pis.students.team076hodnotenie.types.ArrayOfHodnotenies;
@@ -19,6 +24,7 @@ import sk.stuba.fiit.labss2.pis.students.team076kaviaren.Team076KaviarenService;
 import sk.stuba.fiit.labss2.pis.students.team076kaviaren.types.ArrayOfKaviarens;
 import sk.stuba.fiit.labss2.pis.students.team076kaviaren.types.Kaviarens;
 
+import java.io.IOException;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -39,6 +45,9 @@ public class CustomerPageController {
 
     @FXML
     TextField mojehod_textfield;
+
+    @FXML
+    TextField back_button;
 
     @FXML
     private void initialize(){
@@ -75,6 +84,11 @@ public class CustomerPageController {
             return row ;
         });
 
+        back_button.setOnMouseClicked(event -> {
+            String fxmlPath = "/LoginPage.fxml";
+            creteNewWindow(fxmlPath);
+        });
+
     }
 
     private ObservableList<MyTableData> getTableDate(){
@@ -82,6 +96,7 @@ public class CustomerPageController {
         Team076KaviarenPortType port = service.getTeam076KaviarenPort();
         ArrayOfKaviarens allKaviaren = port.getAll();
         List<Kaviarens> listKaviaren = allKaviaren.getKaviaren();
+
 
         Team076HodnotenieService hodnotenieService = new Team076HodnotenieService();
         Team076HodnoteniePortType hodnoteniePort = hodnotenieService.getTeam076HodnoteniePort();
@@ -155,6 +170,25 @@ public class CustomerPageController {
 
         public void setMojeHodnotenie(String hodnotenie) {
             this.mojeHodnotenie.set(hodnotenie);
+        }
+    }
+
+    private void creteNewWindow(String fxmlPath) {
+        FXMLLoader loader = new FXMLLoader();
+        loader.setLocation(getClass().getResource(fxmlPath));
+
+        try {
+            Parent parent = (Parent) loader.load();
+
+            AnchorPane root = (AnchorPane) parent;
+            Stage stage = new Stage();
+            Scene scene = new Scene(root);
+            stage.setScene(scene);
+            stage.show();
+            Stage s = (Stage) back_button.getScene().getWindow();
+            s.close();
+        } catch (IOException e) {
+            e.printStackTrace();
         }
     }
 

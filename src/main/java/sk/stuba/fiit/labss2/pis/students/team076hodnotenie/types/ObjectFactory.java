@@ -49,11 +49,11 @@ public class ObjectFactory {
     }
 
     /**
-     * Create an instance of {@link DeleteResponse }
+     * Create an instance of {@link GetByIdResponse }
      * 
      */
-    public DeleteResponse createDeleteResponse() {
-        return new DeleteResponse();
+    public GetByIdResponse createGetByIdResponse() {
+        return new GetByIdResponse();
     }
 
     /**
@@ -65,83 +65,19 @@ public class ObjectFactory {
     }
 
     /**
-     * Create an instance of {@link Hodnotenie }
+     * Create an instance of {@link Update }
      * 
      */
-    public Hodnotenie createHodnotenie() {
-        return new Hodnotenie();
+    public Update createUpdate() {
+        return new Update();
     }
 
     /**
-     * Create an instance of {@link GetByAttributeValueResponse }
+     * Create an instance of {@link DeleteResponse }
      * 
      */
-    public GetByAttributeValueResponse createGetByAttributeValueResponse() {
-        return new GetByAttributeValueResponse();
-    }
-
-    /**
-     * Create an instance of {@link GetByIdResponse }
-     * 
-     */
-    public GetByIdResponse createGetByIdResponse() {
-        return new GetByIdResponse();
-    }
-
-    /**
-     * Create an instance of {@link GetAllResponse }
-     * 
-     */
-    public GetAllResponse createGetAllResponse() {
-        return new GetAllResponse();
-    }
-
-    /**
-     * Create an instance of {@link GetByNumericConditionResponse }
-     * 
-     */
-    public GetByNumericConditionResponse createGetByNumericConditionResponse() {
-        return new GetByNumericConditionResponse();
-    }
-
-    /**
-     * Create an instance of {@link InsertResponse }
-     * 
-     */
-    public InsertResponse createInsertResponse() {
-        return new InsertResponse();
-    }
-
-    /**
-     * Create an instance of {@link Insert }
-     * 
-     */
-    public Insert createInsert() {
-        return new Insert();
-    }
-
-    /**
-     * Create an instance of {@link Hodnotenies }
-     * 
-     */
-    public Hodnotenies createHodnotenies() {
-        return new Hodnotenies();
-    }
-
-    /**
-     * Create an instance of {@link GetByAttributeValue }
-     * 
-     */
-    public GetByAttributeValue createGetByAttributeValue() {
-        return new GetByAttributeValue();
-    }
-
-    /**
-     * Create an instance of {@link ArrayOfIds }
-     * 
-     */
-    public ArrayOfIds createArrayOfIds() {
-        return new ArrayOfIds();
+    public DeleteResponse createDeleteResponse() {
+        return new DeleteResponse();
     }
 
     /**
@@ -153,11 +89,59 @@ public class ObjectFactory {
     }
 
     /**
-     * Create an instance of {@link Update }
+     * Create an instance of {@link GetByAttributeValueResponse }
      * 
      */
-    public Update createUpdate() {
-        return new Update();
+    public GetByAttributeValueResponse createGetByAttributeValueResponse() {
+        return new GetByAttributeValueResponse();
+    }
+
+    /**
+     * Create an instance of {@link GetByNumericConditionResponse }
+     * 
+     */
+    public GetByNumericConditionResponse createGetByNumericConditionResponse() {
+        return new GetByNumericConditionResponse();
+    }
+
+    /**
+     * Create an instance of {@link Hodnotenie }
+     * 
+     */
+    public Hodnotenie createHodnotenie() {
+        return new Hodnotenie();
+    }
+
+    /**
+     * Create an instance of {@link InsertResponse }
+     * 
+     */
+    public InsertResponse createInsertResponse() {
+        return new InsertResponse();
+    }
+
+    /**
+     * Create an instance of {@link Hodnotenies }
+     * 
+     */
+    public Hodnotenies createHodnotenies() {
+        return new Hodnotenies();
+    }
+
+    /**
+     * Create an instance of {@link GetAllResponse }
+     * 
+     */
+    public GetAllResponse createGetAllResponse() {
+        return new GetAllResponse();
+    }
+
+    /**
+     * Create an instance of {@link UpdateResponse }
+     * 
+     */
+    public UpdateResponse createUpdateResponse() {
+        return new UpdateResponse();
     }
 
     /**
@@ -169,6 +153,14 @@ public class ObjectFactory {
     }
 
     /**
+     * Create an instance of {@link Insert }
+     * 
+     */
+    public Insert createInsert() {
+        return new Insert();
+    }
+
+    /**
      * Create an instance of {@link GetByNumericCondition }
      * 
      */
@@ -177,11 +169,19 @@ public class ObjectFactory {
     }
 
     /**
-     * Create an instance of {@link UpdateResponse }
+     * Create an instance of {@link ArrayOfIds }
      * 
      */
-    public UpdateResponse createUpdateResponse() {
-        return new UpdateResponse();
+    public ArrayOfIds createArrayOfIds() {
+        return new ArrayOfIds();
+    }
+
+    /**
+     * Create an instance of {@link GetByAttributeValue }
+     * 
+     */
+    public GetByAttributeValue createGetByAttributeValue() {
+        return new GetByAttributeValue();
     }
 
     /**

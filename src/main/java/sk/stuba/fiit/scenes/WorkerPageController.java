@@ -46,6 +46,10 @@ public class WorkerPageController {
                 AddToCardPageController controller = loader.<AddToCardPageController>getController();
                 controller.setKaviarenId(this.cafeid);
             }
+            if (fxmlPath.contains("UserRegistration")) {
+                UserRegistrationPageController controller = loader.<UserRegistrationPageController>getController();
+                controller.setCafeid(this.cafeid);
+            }
             AnchorPane root = (AnchorPane) load;
             Stage stage = new Stage();
             Scene scene = new Scene(root);

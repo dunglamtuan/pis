@@ -49,107 +49,11 @@ public class ObjectFactory {
     }
 
     /**
-     * Create an instance of {@link Zakazniks }
-     * 
-     */
-    public Zakazniks createZakazniks() {
-        return new Zakazniks();
-    }
-
-    /**
-     * Create an instance of {@link GetByAttributeValue }
-     * 
-     */
-    public GetByAttributeValue createGetByAttributeValue() {
-        return new GetByAttributeValue();
-    }
-
-    /**
      * Create an instance of {@link InsertResponse }
      * 
      */
     public InsertResponse createInsertResponse() {
         return new InsertResponse();
-    }
-
-    /**
-     * Create an instance of {@link GetById }
-     * 
-     */
-    public GetById createGetById() {
-        return new GetById();
-    }
-
-    /**
-     * Create an instance of {@link GetAll }
-     * 
-     */
-    public GetAll createGetAll() {
-        return new GetAll();
-    }
-
-    /**
-     * Create an instance of {@link Update }
-     * 
-     */
-    public Update createUpdate() {
-        return new Update();
-    }
-
-    /**
-     * Create an instance of {@link UpdateResponse }
-     * 
-     */
-    public UpdateResponse createUpdateResponse() {
-        return new UpdateResponse();
-    }
-
-    /**
-     * Create an instance of {@link GetByNumericConditionResponse }
-     * 
-     */
-    public GetByNumericConditionResponse createGetByNumericConditionResponse() {
-        return new GetByNumericConditionResponse();
-    }
-
-    /**
-     * Create an instance of {@link GetByAttributeValueResponse }
-     * 
-     */
-    public GetByAttributeValueResponse createGetByAttributeValueResponse() {
-        return new GetByAttributeValueResponse();
-    }
-
-    /**
-     * Create an instance of {@link Insert }
-     * 
-     */
-    public Insert createInsert() {
-        return new Insert();
-    }
-
-    /**
-     * Create an instance of {@link Delete }
-     * 
-     */
-    public Delete createDelete() {
-        return new Delete();
-    }
-
-    /**
-     * Create an instance of {@link GetAllResponse }
-     * 
-     */
-    public GetAllResponse createGetAllResponse() {
-        return new GetAllResponse();
-    }
-
-    /**
-     * Create an instance of {@link ArrayOfIds }
-     * 
-     */
-    public ArrayOfIds createArrayOfIds() {
-        return new ArrayOfIds();
     }
 
     /**
@@ -161,19 +65,51 @@ public class ObjectFactory {
     }
 
     /**
-     * Create an instance of {@link Zakaznik }
+     * Create an instance of {@link GetAllResponse }
      * 
      */
-    public Zakaznik createZakaznik() {
-        return new Zakaznik();
+    public GetAllResponse createGetAllResponse() {
+        return new GetAllResponse();
     }
 
     /**
-     * Create an instance of {@link GetByNumericCondition }
+     * Create an instance of {@link GetByNumericConditionResponse }
      * 
      */
-    public GetByNumericCondition createGetByNumericCondition() {
-        return new GetByNumericCondition();
+    public GetByNumericConditionResponse createGetByNumericConditionResponse() {
+        return new GetByNumericConditionResponse();
+    }
+
+    /**
+     * Create an instance of {@link GetAll }
+     * 
+     */
+    public GetAll createGetAll() {
+        return new GetAll();
+    }
+
+    /**
+     * Create an instance of {@link Insert }
+     * 
+     */
+    public Insert createInsert() {
+        return new Insert();
+    }
+
+    /**
+     * Create an instance of {@link GetById }
+     * 
+     */
+    public GetById createGetById() {
+        return new GetById();
+    }
+
+    /**
+     * Create an instance of {@link ArrayOfZakazniks }
+     * 
+     */
+    public ArrayOfZakazniks createArrayOfZakazniks() {
+        return new ArrayOfZakazniks();
     }
 
     /**
@@ -185,11 +121,75 @@ public class ObjectFactory {
     }
 
     /**
-     * Create an instance of {@link ArrayOfZakazniks }
+     * Create an instance of {@link GetByAttributeValueResponse }
      * 
      */
-    public ArrayOfZakazniks createArrayOfZakazniks() {
-        return new ArrayOfZakazniks();
+    public GetByAttributeValueResponse createGetByAttributeValueResponse() {
+        return new GetByAttributeValueResponse();
+    }
+
+    /**
+     * Create an instance of {@link Zakazniks }
+     * 
+     */
+    public Zakazniks createZakazniks() {
+        return new Zakazniks();
+    }
+
+    /**
+     * Create an instance of {@link UpdateResponse }
+     * 
+     */
+    public UpdateResponse createUpdateResponse() {
+        return new UpdateResponse();
+    }
+
+    /**
+     * Create an instance of {@link Update }
+     * 
+     */
+    public Update createUpdate() {
+        return new Update();
+    }
+
+    /**
+     * Create an instance of {@link GetByAttributeValue }
+     * 
+     */
+    public GetByAttributeValue createGetByAttributeValue() {
+        return new GetByAttributeValue();
+    }
+
+    /**
+     * Create an instance of {@link Zakaznik }
+     * 
+     */
+    public Zakaznik createZakaznik() {
+        return new Zakaznik();
+    }
+
+    /**
+     * Create an instance of {@link Delete }
+     * 
+     */
+    public Delete createDelete() {
+        return new Delete();
+    }
+
+    /**
+     * Create an instance of {@link GetByNumericCondition }
+     * 
+     */
+    public GetByNumericCondition createGetByNumericCondition() {
+        return new GetByNumericCondition();
+    }
+
+    /**
+     * Create an instance of {@link ArrayOfIds }
+     * 
+     */
+    public ArrayOfIds createArrayOfIds() {
+        return new ArrayOfIds();
     }
 
     /**

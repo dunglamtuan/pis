@@ -4,9 +4,14 @@ import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseButton;
+import javafx.scene.layout.AnchorPane;
+import javafx.stage.Stage;
 import sk.stuba.fiit.labss2.pis.students.team076hodnotenie.Team076HodnoteniePortType;
 import sk.stuba.fiit.labss2.pis.students.team076hodnotenie.Team076HodnotenieService;
 import sk.stuba.fiit.labss2.pis.students.team076hodnotenie.types.ArrayOfHodnotenies;
@@ -17,6 +22,7 @@ import sk.stuba.fiit.labss2.pis.students.team076kaviaren.Team076KaviarenService;
 import sk.stuba.fiit.labss2.pis.students.team076kaviaren.types.ArrayOfKaviarens;
 import sk.stuba.fiit.labss2.pis.students.team076kaviaren.types.Kaviarens;
 
+import java.io.IOException;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -41,6 +47,9 @@ public class GuestPageController {
 
     @FXML
     Button send_rating_button;
+
+    @FXML
+    Button back_button;
 
     @FXML
     Label info_label;
@@ -84,6 +93,11 @@ public class GuestPageController {
         });
 
         info_label.setVisible(false);
+
+        back_button.setOnMouseClicked(event -> {
+            String fxmlPath = "/LoginPage.fxml";
+            creteNewWindow(fxmlPath);
+        });
 
     }
 
@@ -164,6 +178,25 @@ public class GuestPageController {
 
         public void setHodnotenie(String hodnotenie) {
             this.hodnotenie.set(hodnotenie);
+        }
+    }
+
+    private void creteNewWindow(String fxmlPath) {
+        FXMLLoader loader = new FXMLLoader();
+        loader.setLocation(getClass().getResource(fxmlPath));
+
+        try {
+            Parent parent = (Parent) loader.load();
+
+            AnchorPane root = (AnchorPane) parent;
+            Stage stage = new Stage();
+            Scene scene = new Scene(root);
+            stage.setScene(scene);
+            stage.show();
+            Stage s = (Stage) back_button.getScene().getWindow();
+            s.close();
+        } catch (IOException e) {
+            e.printStackTrace();
         }
     }
 }

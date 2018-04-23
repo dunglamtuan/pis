@@ -11,9 +11,9 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="288.0" prefWidth="454.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sk.stuba.fiit.scenes.UserRegistrationPageController">
+<AnchorPane prefHeight="338.0" prefWidth="484.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sk.stuba.fiit.scenes.UserRegistrationPageController">
    <children>
-      <Pane layoutX="72.0" layoutY="12.0" prefHeight="264.0" prefWidth="326.0">
+      <Pane layoutX="72.0" layoutY="12.0" prefHeight="308.0" prefWidth="326.0">
          <children>
             <TextField fx:id="name_textfield" layoutX="130.0" layoutY="56.0" />
             <TextField fx:id="email_textfield" layoutX="130.0" layoutY="98.0" />
@@ -29,6 +29,8 @@
             <Button fx:id="registration_button" layoutX="119.0" layoutY="225.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="88.0" text="Registruj" />
             <TextField fx:id="pass_textfield" layoutX="130.0" layoutY="186.0" />
             <Label layoutX="41.0" layoutY="190.0" text="Heslo" />
+            <Button fx:id="back_button" layoutX="8.0" layoutY="225.0" mnemonicParsing="false" text="Spat" />
+            <Label fx:id="mail_error_label" layoutX="130.0" layoutY="267.0" text="Email ma zly format" textFill="#f80505" />
          </children>
       </Pane>
    </children>
