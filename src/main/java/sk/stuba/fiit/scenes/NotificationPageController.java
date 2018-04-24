@@ -34,6 +34,9 @@ public class NotificationPageController {
     Button confirm_button;
 
     @FXML
+    Button back_button;
+
+    @FXML
     private void initialize(){
         on_checkbox.setSelected(true);
         on_checkbox.setOnAction(event -> {
@@ -59,6 +62,11 @@ public class NotificationPageController {
             else
                 setNotification(Integer.valueOf(value_textfield.getText()), false);
 
+            creteNewWindow(fxml);
+        });
+
+        back_button.setOnMouseClicked(event -> {
+            String fxml = "/AdminPage.fxml";
             creteNewWindow(fxml);
         });
 

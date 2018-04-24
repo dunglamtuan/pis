@@ -22,7 +22,11 @@ import sk.stuba.fiit.labss2.pis.students.team076kaviaren.Team076KaviarenService;
 import sk.stuba.fiit.labss2.pis.students.team076kaviaren.types.ArrayOfKaviarens;
 import sk.stuba.fiit.labss2.pis.students.team076kaviaren.types.Kaviarens;
 
+import javax.xml.datatype.DatatypeConfigurationException;
+import javax.xml.datatype.DatatypeFactory;
 import java.io.IOException;
+import java.util.Calendar;
+import java.util.GregorianCalendar;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -110,6 +114,14 @@ public class GuestPageController {
         hodnotenie.setBoloVidene(false);
         hodnotenie.setHodnota(rating);
         hodnotenie.setKaviarenId(cafe_id);
+
+        GregorianCalendar c = new GregorianCalendar();
+        c.setTime(Calendar.getInstance().getTime());
+        try {
+            hodnotenie.setDatumPridania(DatatypeFactory.newInstance().newXMLGregorianCalendar(c));
+        } catch (DatatypeConfigurationException e) {
+            e.printStackTrace();
+        }
 
         port.insert("076", "GS3kMb", hodnotenie);
         info_label.setVisible(true);

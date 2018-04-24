@@ -22,7 +22,11 @@ import sk.stuba.fiit.labss2.pis.students.team076kaviaren.Team076KaviarenService;
 import sk.stuba.fiit.labss2.pis.students.team076kaviaren.types.ArrayOfKaviarens;
 import sk.stuba.fiit.labss2.pis.students.team076kaviaren.types.Kaviarens;
 
+import javax.xml.datatype.DatatypeConfigurationException;
+import javax.xml.datatype.DatatypeFactory;
 import java.io.IOException;
+import java.util.Calendar;
+import java.util.GregorianCalendar;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -149,7 +153,7 @@ public class CustomerPageController {
         return result;
     }
 
-    private void updateMyRating(int myInputRating){
+    private void updateMyRating(int myInputRating) {
         Team076HodnotenieService hodnotenieService = new Team076HodnotenieService();
         Team076HodnoteniePortType hodnoteniePort = hodnotenieService.getTeam076HodnoteniePort();
         ArrayOfHodnotenies kaviaren_id = hodnoteniePort.getAll();
@@ -167,6 +171,14 @@ public class CustomerPageController {
             hodnotenie.setBoloVidene(false);
             hodnotenie.setZakaznikId(this.userid);
 
+            GregorianCalendar c = new GregorianCalendar();
+            c.setTime(Calendar.getInstance().getTime());
+            try {
+                hodnotenie.setDatumPridania(DatatypeFactory.newInstance().newXMLGregorianCalendar(c));
+            } catch (DatatypeConfigurationException e) {
+                e.printStackTrace();
+            }
+
             hodnoteniePort.insert("076", "GS3kMb", hodnotenie);
         } else {
             Hodnotenies myCurrentRating = myRating.get(0);
@@ -176,6 +188,15 @@ public class CustomerPageController {
             hodnotenie.setHodnota(myCurrentRating.getHodnota());
             hodnotenie.setBoloVidene(false);
             hodnotenie.setZakaznikId(myCurrentRating.getZakaznikId());
+
+            GregorianCalendar c = new GregorianCalendar();
+            c.setTime(Calendar.getInstance().getTime());
+            try {
+                hodnotenie.setDatumPridania(DatatypeFactory.newInstance().newXMLGregorianCalendar(c));
+            } catch (DatatypeConfigurationException e) {
+                e.printStackTrace();
+            }
+
             myCurrentRating.setHodnota(myInputRating);
             hodnoteniePort.update("076", "GS3kMb", myCurrentRating.getId(), hodnotenie);
         }

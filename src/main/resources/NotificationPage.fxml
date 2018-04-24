@@ -6,7 +6,6 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-
 <AnchorPane prefHeight="228.0" prefWidth="424.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sk.stuba.fiit.scenes.NotificationPageController">
    <children>
       <Pane layoutX="10.0" prefHeight="228.0" prefWidth="400.0">
@@ -17,6 +16,7 @@
             <Label layoutX="90.0" layoutY="129.0" prefHeight="17.0" prefWidth="55.0" text="Hodnota" />
             <Button fx:id="confirm_button" layoutX="173.0" layoutY="177.0" mnemonicParsing="false" text="Potvrdit" />
             <Label layoutX="142.0" layoutY="24.0" text="Nastavenie notifikacie" />
+            <Button fx:id="back_button" layoutX="14.0" layoutY="177.0" mnemonicParsing="false" text="Spat" />
          </children>
       </Pane>
    </children>

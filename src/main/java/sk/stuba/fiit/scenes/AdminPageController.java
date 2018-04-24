@@ -7,11 +7,9 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.input.MouseButton;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import sk.stuba.fiit.labss2.pis.students.team076hodnotenie.Team076HodnoteniePortType;
@@ -73,6 +71,23 @@ public class AdminPageController {
 
         cafes_tableview.setItems(getTableDate());
         cafes_tableview.getColumns().addAll(name_column, adress_column, average_column);
+
+        cafes_tableview.setRowFactory(tv -> {
+            TableRow<AllTableData> row = new TableRow();
+            row.setOnMouseClicked(event -> {
+                if (! row.isEmpty() && event.getButton()== MouseButton.PRIMARY
+                        && event.getClickCount() == 2) {
+
+                    AllTableData clickedRow = row.getItem();
+                    adresa_textfield.setText(clickedRow.getAdresa());
+                    average_textfield.setText(clickedRow.getHodnotenie());
+                }
+            });
+            return row ;
+        });
+
+        adresa_textfield.setEditable(false);
+        average_textfield.setEditable(false);
 
         initNotificationTable();
 
@@ -199,8 +214,11 @@ public class AdminPageController {
             Zakaznik zakaznik = zakaznikPort.getById(hodnotenies.getZakaznikId());
             Kaviaren kaviaren = kaviarenPort.getById(hodnotenies.getKaviarenId());
 
+            System.out.println(hodnotenies.getDatumPridania());
+
             result.add(new NotificationData(kaviaren.getName(), zakaznik.getName(),
-                    String.valueOf(hodnotenies.getHodnota()),String.valueOf(hodnotenies.getDatumPridania())));
+                    String.valueOf(hodnotenies.getHodnota()),
+                    hodnotenies.getDatumPridania()!= null ? String.valueOf(hodnotenies.getDatumPridania()) : ""));
         }
 
         return result;
