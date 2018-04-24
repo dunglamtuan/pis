@@ -21,7 +21,7 @@ public class WorkerPageController {
     Button add_to_account_button;
 
     @FXML
-    Button exit_button;
+    Button logout_button;
 
     @FXML
     public void initialize(){
@@ -32,6 +32,11 @@ public class WorkerPageController {
 
         add_to_account_button.setOnMouseClicked(event -> {
             String fxml = "/AddToCardPage.fxml";
+            creteNewWindow(fxml);
+        });
+
+        logout_button.setOnMouseClicked(event -> {
+            String fxml = "/LoginPage.fxml";
             creteNewWindow(fxml);
         });
     }
@@ -55,7 +60,7 @@ public class WorkerPageController {
             Scene scene = new Scene(root);
             stage.setScene(scene);
             stage.show();
-            Stage s = (Stage) exit_button.getScene().getWindow();
+            Stage s = (Stage) logout_button.getScene().getWindow();
             s.close();
         } catch (IOException e) {
             e.printStackTrace();

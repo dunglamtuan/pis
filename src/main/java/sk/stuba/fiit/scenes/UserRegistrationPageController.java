@@ -1,5 +1,7 @@
 package sk.stuba.fiit.scenes;
 
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -9,6 +11,9 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
+import sk.stuba.fiit.labss2.pis.students.team076kaviaren.Team076KaviarenPortType;
+import sk.stuba.fiit.labss2.pis.students.team076kaviaren.Team076KaviarenService;
+import sk.stuba.fiit.labss2.pis.students.team076kaviaren.types.Kaviarens;
 import sk.stuba.fiit.labss2.pis.students.team076zakaznik.Team076ZakaznikPortType;
 import sk.stuba.fiit.labss2.pis.students.team076zakaznik.Team076ZakaznikService;
 import sk.stuba.fiit.labss2.pis.students.team076zakaznik.types.ArrayOfZakazniks;
@@ -51,7 +56,17 @@ public class UserRegistrationPageController {
 
         mail_error_label.setVisible(false);
 
-        email_textfield.textProperty().addListener((observable, oldValue, newValue) -> {
+        cardid_textfield.textProperty().addListener(new ChangeListener<String>() {
+            @Override
+            public void changed(ObservableValue<? extends String> observable, String oldValue,
+                                String newValue) {
+                if (!newValue.matches("\\d*")) {
+                    cardid_textfield.setText(newValue.replaceAll("[^\\d]", ""));
+                }
+            }
+        });
+
+        cardid_textfield.textProperty().addListener((observable, oldValue, newValue) -> {
             mail_error_label.setVisible(false);
         });
 
@@ -64,8 +79,10 @@ public class UserRegistrationPageController {
             if (!validateEmailInput(email_input)){
                 mail_error_label.setText("Neplatna emailova adresa");
                 mail_error_label.setVisible(true);
-            }
-            else if (isCardIdExisted(Integer.valueOf(cardd_input))){
+            } else if (isCardIdExisted(Integer.valueOf(cardd_input))){
+                mail_error_label.setText("Cislo karty uz existuje");
+                mail_error_label.setVisible(true);
+            } else if (isCardInputAsKaviarenId(Integer.valueOf(cardd_input))){
                 mail_error_label.setText("Cislo karty uz existuje");
                 mail_error_label.setVisible(true);
             } else {
@@ -136,10 +153,15 @@ public class UserRegistrationPageController {
                 .stream()
                 .filter(item -> item.getCisloKarty() == cardId)
                 .collect(Collectors.toList());
-        if (collect.isEmpty())
-            return false;
-        else
-            return true;
+        return !collect.isEmpty();
+    }
+
+    private boolean isCardInputAsKaviarenId(int cardId) {
+        Team076KaviarenService service = new Team076KaviarenService();
+        Team076KaviarenPortType port = service.getTeam076KaviarenPort();
+
+        List<Kaviarens> kaviarens = port.getAll().getKaviaren();
+        return !kaviarens.stream().filter(kaviaren -> kaviaren.getId() == cardId).collect(Collectors.toList()).isEmpty();
     }
 
     public void setCafeid(int cafeid) {

@@ -17,8 +17,9 @@
          <children>
             <Button fx:id="confirm_button" layoutX="103.0" layoutY="123.0" mnemonicParsing="false" prefHeight="27.0" prefWidth="96.0" text="Potvrdit" />
             <TextField fx:id="cardid_textfield" layoutX="103.0" layoutY="41.0" prefHeight="27.0" prefWidth="173.0" />
-            <Label layoutX="14.0" layoutY="46.0" text="Cislo zakaznika" />
+            <Label layoutX="14.0" layoutY="46.0" text="Cislo karty" />
             <Button fx:id="back_button" layoutX="14.0" layoutY="124.0" mnemonicParsing="false" text="Spat" />
+            <Label fx:id="error_label" layoutX="137.0" layoutY="74.0" text="Cislo kary neexistuje" textFill="#fc0606" />
          </children>
       </Pane>
       <Label layoutX="158.0" layoutY="39.0" prefHeight="17.0" prefWidth="152.0" text="Pridanie na ucet" textFill="#09f805">

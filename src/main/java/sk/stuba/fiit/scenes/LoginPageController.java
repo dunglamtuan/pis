@@ -44,6 +44,9 @@ public class LoginPageController {
     Label error_label;
 
     @FXML
+    Button exit_button;
+
+    @FXML
     private void initialize(){
         error_label.setVisible(false);
         login_button.setOnMouseClicked(event -> {
@@ -73,6 +76,8 @@ public class LoginPageController {
             String fxmlPath = "/GuestPage.fxml";
             creteNewWindow(fxmlPath);
         });
+
+        exit_button.setOnMouseClicked(event -> ((Stage) exit_button.getScene().getWindow()).close());
     }
 
     private Boolean isCustomer(String cardId, String heslo) {

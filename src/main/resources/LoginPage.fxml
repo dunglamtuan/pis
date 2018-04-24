@@ -11,9 +11,9 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="242.0" prefWidth="396.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sk.stuba.fiit.scenes.LoginPageController">
+<AnchorPane prefHeight="290.0" prefWidth="396.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sk.stuba.fiit.scenes.LoginPageController">
    <children>
-      <Pane layoutX="13.0" layoutY="28.0" prefHeight="200.0" prefWidth="370.0">
+      <Pane layoutX="13.0" layoutY="28.0" prefHeight="258.0" prefWidth="370.0">
          <children>
             <Label layoutX="138.0" layoutY="14.0" prefHeight="31.0" prefWidth="94.0" text="Prihlasovanie" textAlignment="CENTER" textFill="#f8050d">
                <font>
@@ -26,6 +26,7 @@
             <Button fx:id="asGuest_button" layoutX="130.0" layoutY="161.0" mnemonicParsing="false" style="-fx-background-color: pink;" text="Continue as guest" />
             <Label layoutX="65.0" layoutY="57.0" text="CardID/CafeID" />
             <Label layoutX="65.0" layoutY="92.0" text="Heslo" />
+            <Button fx:id="exit_button" layoutX="130.0" layoutY="209.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="111.0" style="-fx-background-color: red;" text="Exit" textFill="#0d0d0d" />
          </children>
       </Pane>
       <Label fx:id="error_label" layoutX="6.0" layoutY="6.0" text="Label" textFill="#ff0606" />
