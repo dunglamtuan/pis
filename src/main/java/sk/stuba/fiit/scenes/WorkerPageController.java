@@ -24,7 +24,8 @@ public class WorkerPageController {
     Button logout_button;
 
     @FXML
-    public void initialize(){
+    public void initialize(int cafeid){
+        this.cafeid = cafeid;
         registration_button.setOnMouseClicked(event -> {
             String fxml = "/UserRegistrationPage.fxml";
             creteNewWindow(fxml);
@@ -49,11 +50,11 @@ public class WorkerPageController {
             Parent load = (Parent) loader.load();
             if (fxmlPath.contains("AddToCard")) {
                 AddToCardPageController controller = loader.<AddToCardPageController>getController();
-                controller.setKaviarenId(this.cafeid);
+                controller.initialize(this.cafeid);
             }
             if (fxmlPath.contains("UserRegistration")) {
                 UserRegistrationPageController controller = loader.<UserRegistrationPageController>getController();
-                controller.setCafeid(this.cafeid);
+                controller.initialize(this.cafeid);
             }
             AnchorPane root = (AnchorPane) load;
             Stage stage = new Stage();

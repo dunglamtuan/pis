@@ -25,7 +25,7 @@ import java.util.stream.Collectors;
 
 public class LoginPageController {
 
-    private static int userid = 0;
+    private int userid;
     private int cafeid;
 
     @FXML
@@ -134,14 +134,14 @@ public class LoginPageController {
             if (fxmlPath.contains("Customer")) {
                 CustomerPageController controller = loader.getController();
                 System.out.println("Contains customer");
-                controller.setUserid(this.userid);
+                controller.initialize(this.userid);
             }
 
             if (fxmlPath.contains("Worker")) {
 
                 WorkerPageController controller = loader.<WorkerPageController>getController();
                 System.out.println("Contains worker");
-                controller.setCafeid(this.cafeid);
+                controller.initialize(this.cafeid);
             }
 
             AnchorPane root = (AnchorPane) parent;

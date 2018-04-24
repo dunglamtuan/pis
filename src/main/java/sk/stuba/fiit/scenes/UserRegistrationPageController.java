@@ -52,7 +52,8 @@ public class UserRegistrationPageController {
     Label mail_error_label;
 
     @FXML
-    private void initialize(){
+    public void initialize(int cafeid){
+        this.cafeid = cafeid;
 
         mail_error_label.setVisible(false);
 

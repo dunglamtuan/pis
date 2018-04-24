@@ -44,8 +44,8 @@ public class AddToCardPageController {
     Label error_label;
 
     @FXML
-    private void initialize(){
-
+    public void initialize(int kaviarenId){
+        this.kaviarenId = kaviarenId;
         error_label.setVisible(false);
 
         cardid_textfield.textProperty().addListener(new ChangeListener<String>() {

@@ -28,7 +28,7 @@ import java.util.stream.Collectors;
 
 public class CustomerPageController {
 
-    private int userid;
+    private Integer userid;
 
     private static int cafe_id;
 
@@ -51,10 +51,15 @@ public class CustomerPageController {
     Button change_rate_button;
 
     @FXML
-    private void initialize(){
+    Label succ_label;
+
+    @FXML
+    void initialize(int userid){
+        this.userid = userid;
 
         adresa_textfield.setEditable(false);
         priemer_textfield.setEditable(false);
+        succ_label.setVisible(false);
 
         TableColumn name_column = new TableColumn("Meno");
         name_column.setPrefWidth(my_cofes_tableview.getPrefWidth()/4);
@@ -92,9 +97,14 @@ public class CustomerPageController {
             return row ;
         });
 
+        adresa_textfield.textProperty().addListener((observable, oldValue, newValue) -> {
+            succ_label.setVisible(false);
+        });
+
         change_rate_button.setOnMouseClicked(event -> {
             int rating = Integer.valueOf(mojehod_textfield.getText());
             updateMyRating(rating);
+            succ_label.setVisible(true);
         });
 
         back_button.setOnMouseClicked(event -> {
@@ -115,24 +125,25 @@ public class CustomerPageController {
         Team076HodnoteniePortType hodnoteniePort = hodnotenieService.getTeam076HodnoteniePort();
         ArrayOfHodnotenies kaviaren_id = hodnoteniePort.getAll();
         List<Hodnotenies> hodnotenia = kaviaren_id.getHodnoteny();
+        System.out.println("length of all hodnotenia: "+hodnotenia.size());
 
-        List<Hodnotenies> collect1 = hodnotenia.stream().filter(item -> item.getZakaznikId() == userid).collect(Collectors.toList());
-        int mojeHodnotenie = 0;
-        if (collect1.size() > 0)
-            mojeHodnotenie = collect1.get(0).getHodnota();
+        List<Hodnotenies> hodnoteniaByUserId = hodnotenia.stream().filter(item -> item.getZakaznikId() == this.userid.intValue()).collect(Collectors.toList());
+        System.out.println("User id: "+ userid+" Length of hodnoteniaByUserId: " + hodnoteniaByUserId.size());
 
         ObservableList<MyTableData> result = FXCollections.observableArrayList();
-        for (Kaviarens kaviaren : listKaviaren) {
-            List<Hodnotenies> collect = hodnotenia.stream()
-                    .filter(item -> item.getKaviarenId() == kaviaren.getId())
-                    .collect(Collectors.toList());
-            int sum = collect.stream().mapToInt(Hodnotenies::getHodnota).sum();
-            double average = 0;
-            if (collect.size()>0)
-                average = (double) sum / collect.size();
+        for (Hodnotenies hodnot : hodnoteniaByUserId) {
+            Kaviarens cafeShop = listKaviaren.stream()
+                    .filter(cafe -> cafe.getId() == hodnot.getKaviarenId())
+                    .collect(Collectors.toList()).get(0);
 
-            result.add(new MyTableData(String.valueOf(kaviaren.getId()), kaviaren.getName(), kaviaren.getAdresa(),
-                    String.valueOf(average), String.valueOf(mojeHodnotenie)));
+            List<Hodnotenies> hodnoteniaByCafeId = hodnotenia.stream()
+                    .filter(cafe -> cafe.getKaviarenId() == hodnot.getKaviarenId()).collect(Collectors.toList());
+            int sum = hodnoteniaByCafeId.stream().mapToInt(Hodnotenies::getHodnota).sum();
+            double average = (double) sum / (hodnoteniaByCafeId.size());
+
+            result.add(new MyTableData(String.valueOf(cafeShop.getId()), cafeShop.getName(), cafeShop.getAdresa(),
+                    String.valueOf(average), String.valueOf(hodnot.getHodnota())));
+
         }
 
         return result;
@@ -247,7 +258,7 @@ public class CustomerPageController {
         }
     }
 
-    public void setUserid(int userid) {
-        this.userid = userid;
+    public void setUserid(int useridd) {
+        this.userid = useridd;
     }
 }
