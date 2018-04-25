@@ -121,8 +121,7 @@ public class UserRegistrationPageController {
 
             WorkerPageController controller = loader.<WorkerPageController>getController();
             System.out.println("Contains worker");
-            controller.setCafeid(this.cafeid);
-
+            controller.initialize(this.cafeid);
 
             AnchorPane root = (AnchorPane) parent;
             Stage stage = new Stage();

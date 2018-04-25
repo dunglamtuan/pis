@@ -109,7 +109,7 @@ public class AddToCardPageController {
             navsteva.setName("");
             navsteva.setKaviarenId(this.kaviarenId);
             navsteva.setPocetNavstev(1);
-            navsteva.setZakaznikId(Integer.valueOf(cardid));
+            navsteva.setZakaznikId(zakaznik.getId());
 
             port.insert("076", "GS3kMb", navsteva);
         } else {
@@ -132,7 +132,7 @@ public class AddToCardPageController {
 
             WorkerPageController controller = loader.<WorkerPageController>getController();
             System.out.println("Contains worker");
-            controller.setCafeid(this.kaviarenId);
+            controller.initialize(this.kaviarenId);
 
 
             AnchorPane root = (AnchorPane) parent;
