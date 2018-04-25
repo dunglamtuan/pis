@@ -7,25 +7,25 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane prefHeight="446.0" prefWidth="746.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sk.stuba.fiit.scenes.CustomerPageController">
+<AnchorPane prefHeight="470.0" prefWidth="1028.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sk.stuba.fiit.scenes.CustomerPageController">
    <children>
-      <Pane layoutX="14.0" layoutY="14.0" prefHeight="406.0" prefWidth="724.0">
+      <Pane layoutX="14.0" layoutY="14.0" prefHeight="436.0" prefWidth="997.0">
          <children>
-            <Label layoutX="93.0" layoutY="20.0" text="Moje kaviarne" textFill="#00f83e">
+            <Label layoutX="149.0" layoutY="23.0" text="Moje kaviarne" textFill="#00f83e">
                <font>
                   <Font size="20.0" />
                </font>
             </Label>
-            <TableView fx:id="my_cofes_tableview" layoutX="14.0" layoutY="66.0" prefHeight="306.0" prefWidth="358.0" />
-            <TextField fx:id="adresa_textfield" layoutX="525.0" layoutY="86.0" />
-            <TextField fx:id="priemer_textfield" layoutX="525.0" layoutY="128.0" />
-            <TextField fx:id="mojehod_textfield" layoutX="525.0" layoutY="166.0" />
-            <Label layoutX="428.0" layoutY="90.0" text="Adresa" />
-            <Label layoutX="390.0" layoutY="132.0" text="Priermne hodnotenie" />
-            <Label layoutX="401.0" layoutY="170.0" text="MojeHodnotenie" />
+            <TableView fx:id="my_cofes_tableview" layoutX="14.0" layoutY="66.0" prefHeight="306.0" prefWidth="394.0" />
+            <TextField fx:id="adresa_textfield" layoutX="717.0" layoutY="84.0" />
+            <TextField fx:id="priemer_textfield" layoutX="717.0" layoutY="126.0" />
+            <TextField fx:id="mojehod_textfield" layoutX="717.0" layoutY="164.0" />
+            <Label layoutX="525.0" layoutY="90.0" text="Adresa" />
+            <Label layoutX="468.0" layoutY="132.0" text="Priermne hodnotenie" />
+            <Label layoutX="485.0" layoutY="170.0" text="MojeHodnotenie" />
             <Button fx:id="back_button" layoutX="14.0" layoutY="380.0" mnemonicParsing="false" text="Spat" />
-            <Button fx:id="change_rate_button" layoutX="525.0" layoutY="219.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="124.0" text="Zmenit hodnotenie" />
-            <Label fx:id="succ_label" layoutX="525.0" layoutY="261.0" text="Uspesne si zmenil svoje hodnotenie" />
+            <Button fx:id="change_rate_button" layoutX="717.0" layoutY="228.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="124.0" text="Zmenit hodnotenie" />
+            <Label fx:id="succ_label" layoutX="657.0" layoutY="318.0" text="Uspesne si zmenil svoje hodnotenie" />
          </children>
       </Pane>
    </children>
