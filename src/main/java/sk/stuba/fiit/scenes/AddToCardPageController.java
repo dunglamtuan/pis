@@ -6,6 +6,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
@@ -20,8 +21,13 @@ import sk.stuba.fiit.labss2.pis.students.team076navsteva.types.Navstevas;
 import sk.stuba.fiit.labss2.pis.students.team076zakaznik.Team076ZakaznikPortType;
 import sk.stuba.fiit.labss2.pis.students.team076zakaznik.Team076ZakaznikService;
 import sk.stuba.fiit.labss2.pis.students.team076zakaznik.types.Zakazniks;
+import sk.stuba.fiit.labss2.pis.students.team076zlava.Team076ZlavaPortType;
+import sk.stuba.fiit.labss2.pis.students.team076zlava.Team076ZlavaService;
+import sk.stuba.fiit.labss2.pis.students.team076zlava.types.ArrayOfZlavas;
+import sk.stuba.fiit.labss2.pis.students.team076zlava.types.Zlavas;
 
 import java.io.IOException;
+import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -66,6 +72,13 @@ public class AddToCardPageController {
                 error_label.setVisible(true);
             }else {
                 addTCard(cardid_input);
+
+                Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                alert.setTitle("Vypocet zlavy");
+                alert.setHeaderText("Aktualna zlava");
+                alert.setContentText("Aktualna zlava je: "+ getDiscountRate()+"%");
+
+                alert.showAndWait();
 
                 String fxmlPath = "/WorkerPage.fxml";
                 creteNewWindow(fxmlPath);
@@ -120,6 +133,33 @@ public class AddToCardPageController {
             navsteva.setKaviarenId(navstevas1.getKaviarenId());
 
             port.update("076", "GS3kMb", navstevas1.getId(), navsteva);
+        }
+    }
+
+    private int getDiscountRate(){
+        Team076ZlavaService zlavaService = new Team076ZlavaService();
+        Team076ZlavaPortType zlavaPort = zlavaService.getTeam076ZlavaPort();
+
+
+        Team076NavstevaService navstevaService = new Team076NavstevaService();
+        Team076NavstevaPortType port = navstevaService.getTeam076NavstevaPort();
+
+        ArrayOfNavstevas navstevas = port.getByAttributeValue("zakaznik_id ",
+                String.valueOf(zakaznik.getId()), new ArrayOfIds());
+        List<Navstevas> navstevaList = navstevas.getNavsteva();
+        List<Navstevas> navstevaByUserIdAndKaviarenId = navstevaList.stream()
+                .filter(nav -> nav.getKaviarenId() == this.kaviarenId)
+                .collect(Collectors.toList());
+        if (navstevaByUserIdAndKaviarenId.isEmpty())
+            return 0;
+        else {
+            int purchase_done = navstevaByUserIdAndKaviarenId.get(0).getPocetNavstev();
+            ArrayOfZlavas pocet_nakupov_ = zlavaPort.getByNumericCondition("pocet_nakupov ", String.valueOf(purchase_done),
+                    "<=", new sk.stuba.fiit.labss2.pis.students.team076zlava.types.ArrayOfIds());
+            List<Zlavas> zlavaList = pocet_nakupov_.getZlava();
+
+            Zlavas maxZlava = zlavaList.stream().max(Comparator.comparing(Zlavas::getHodnota)).orElse(new Zlavas());
+            return maxZlava.getHodnota();
         }
     }
 
