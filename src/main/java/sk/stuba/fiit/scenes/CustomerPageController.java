@@ -21,6 +21,11 @@ import sk.stuba.fiit.labss2.pis.students.team076kaviaren.Team076KaviarenPortType
 import sk.stuba.fiit.labss2.pis.students.team076kaviaren.Team076KaviarenService;
 import sk.stuba.fiit.labss2.pis.students.team076kaviaren.types.ArrayOfKaviarens;
 import sk.stuba.fiit.labss2.pis.students.team076kaviaren.types.Kaviarens;
+import sk.stuba.fiit.labss2.pis.students.team076navsteva.Team076NavstevaPortType;
+import sk.stuba.fiit.labss2.pis.students.team076navsteva.Team076NavstevaService;
+import sk.stuba.fiit.labss2.pis.students.team076navsteva.types.ArrayOfIds;
+import sk.stuba.fiit.labss2.pis.students.team076navsteva.types.ArrayOfNavstevas;
+import sk.stuba.fiit.labss2.pis.students.team076navsteva.types.Navstevas;
 
 import javax.xml.datatype.DatatypeConfigurationException;
 import javax.xml.datatype.DatatypeFactory;
@@ -61,6 +66,9 @@ public class CustomerPageController {
     void initialize(int userid){
         this.userid = userid;
 
+        my_cofes_tableview.getColumns().clear();
+        my_cofes_tableview.getItems().clear();
+
         adresa_textfield.setEditable(false);
         priemer_textfield.setEditable(false);
         succ_label.setVisible(false);
@@ -79,7 +87,7 @@ public class CustomerPageController {
 
         TableColumn my_rate_column = new TableColumn("Moje hodnotenie");
         my_rate_column.setPrefWidth(my_cofes_tableview.getPrefWidth()/4);
-        rate_column.setCellValueFactory(new PropertyValueFactory<MyTableData, String>("mojeHodnotenie"));
+        my_rate_column.setCellValueFactory(new PropertyValueFactory<MyTableData, String>("mojeHodnotenie"));
 
         //ObservableList<TableData> result = FXCollections.observableArrayList(new TableData("0", "asdasd"));
         my_cofes_tableview.setItems(getTableDate());
@@ -93,6 +101,7 @@ public class CustomerPageController {
 
                     MyTableData clickedRow = row.getItem();
                     cafe_id = Integer.valueOf(clickedRow.getId());
+                    System.out.println("CafeId is: " + cafe_id);
                     adresa_textfield.setText(clickedRow.getAdresa());
                     priemer_textfield.setText(clickedRow.getHodnotenie());
                     mojehod_textfield.setText(clickedRow.getMojeHodnotenie());
@@ -108,7 +117,9 @@ public class CustomerPageController {
         change_rate_button.setOnMouseClicked(event -> {
             int rating = Integer.valueOf(mojehod_textfield.getText());
             updateMyRating(rating);
+            initialize(userid);
             succ_label.setVisible(true);
+
         });
 
         back_button.setOnMouseClicked(event -> {
@@ -119,51 +130,74 @@ public class CustomerPageController {
     }
 
     private ObservableList<MyTableData> getTableDate(){
-        Team076KaviarenService service = new Team076KaviarenService();
-        Team076KaviarenPortType port = service.getTeam076KaviarenPort();
-        ArrayOfKaviarens allKaviaren = port.getAll();
-        List<Kaviarens> listKaviaren = allKaviaren.getKaviaren();
-
+        Team076NavstevaService navstevaService = new Team076NavstevaService();
+        Team076NavstevaPortType navstevaPort = navstevaService.getTeam076NavstevaPort();
+        ArrayOfNavstevas zakaznik_id = navstevaPort.getByAttributeValue("zakaznik_id", String.valueOf(this.userid), new ArrayOfIds());
+        List<Navstevas> navstevaListByUserId = zakaznik_id.getNavsteva();
 
         Team076HodnotenieService hodnotenieService = new Team076HodnotenieService();
         Team076HodnoteniePortType hodnoteniePort = hodnotenieService.getTeam076HodnoteniePort();
-        ArrayOfHodnotenies kaviaren_id = hodnoteniePort.getAll();
-        List<Hodnotenies> hodnotenia = kaviaren_id.getHodnoteny();
-        System.out.println("length of all hodnotenia: "+hodnotenia.size());
+        ArrayOfHodnotenies all = hodnoteniePort.getAll();
+        List<Hodnotenies> allHodnotenia = all.getHodnoteny();
 
-        List<Hodnotenies> hodnoteniaByUserId = hodnotenia.stream().filter(item -> item.getZakaznikId() == this.userid.intValue()).collect(Collectors.toList());
-        System.out.println("User id: "+ userid+" Length of hodnoteniaByUserId: " + hodnoteniaByUserId.size());
+        Team076KaviarenService kaviarenService = new Team076KaviarenService();
+        Team076KaviarenPortType kaviarenPort = kaviarenService.getTeam076KaviarenPort();
+        ArrayOfKaviarens allCafe = kaviarenPort.getAll();
+        List<Kaviarens> allKaviaren = allCafe.getKaviaren();
 
         ObservableList<MyTableData> result = FXCollections.observableArrayList();
-        for (Hodnotenies hodnot : hodnoteniaByUserId) {
-            Kaviarens cafeShop = listKaviaren.stream()
-                    .filter(cafe -> cafe.getId() == hodnot.getKaviarenId())
-                    .collect(Collectors.toList()).get(0);
-
-            List<Hodnotenies> hodnoteniaByCafeId = hodnotenia.stream()
-                    .filter(cafe -> cafe.getKaviarenId() == hodnot.getKaviarenId()).collect(Collectors.toList());
-            int sum = hodnoteniaByCafeId.stream().mapToInt(Hodnotenies::getHodnota).sum();
-            double average = (double) sum / (hodnoteniaByCafeId.size());
-
-            result.add(new MyTableData(String.valueOf(cafeShop.getId()), cafeShop.getName(), cafeShop.getAdresa(),
-                    String.valueOf(average), String.valueOf(hodnot.getHodnota())));
-
+        for (Navstevas navsteva : navstevaListByUserId) {
+            int kaviarenId = navsteva.getKaviarenId();
+            System.out.println("Primer: "+String.valueOf(getAverageByCafeId(allHodnotenia, kaviarenId)));
+            result.add(new MyTableData(String.valueOf(kaviarenId), getCafeNameByCafeId(allKaviaren, kaviarenId),
+                    getCafeAddressByCafeId(allKaviaren, kaviarenId), String.valueOf(getAverageByCafeId(allHodnotenia, kaviarenId)),
+                    String.valueOf(getMyRateByCafeId(allHodnotenia, kaviarenId)<= 0 ? "" : (getMyRateByCafeId(allHodnotenia, kaviarenId)))));
         }
 
         return result;
     }
 
+    private double getAverageByCafeId(List<Hodnotenies> allHodnotenia, int cafeId) {
+        List<Hodnotenies> listByCafeId = allHodnotenia.stream().filter(item -> item.getKaviarenId() == cafeId).collect(Collectors.toList());
+
+        int sum = listByCafeId.stream().mapToInt(Hodnotenies::getHodnota).sum();
+        return (double) sum / listByCafeId.size();
+    }
+
+    private int getMyRateByCafeId(List<Hodnotenies> allHodnotenia, int cafeId) {
+        List<Hodnotenies> collectMyRate = allHodnotenia
+                .stream()
+                .filter(item -> item.getKaviarenId() == cafeId && item.getZakaznikId() == userid)
+                .collect(Collectors.toList());
+
+        if (collectMyRate.isEmpty())
+            return -1;
+        else
+            return collectMyRate.get(0).getHodnota();
+
+    }
+
+    private String getCafeNameByCafeId(List<Kaviarens> allKaviaren, int cafeId) {
+        return allKaviaren.stream().filter(item -> item.getId() == cafeId).collect(Collectors.toList()).get(0).getName();
+    }
+
+    private String getCafeAddressByCafeId(List<Kaviarens> allKaviaren, int cafeId) {
+        return allKaviaren.stream().filter(item -> item.getId() == cafeId).collect(Collectors.toList()).get(0).getAdresa();
+    }
+
     private void updateMyRating(int myInputRating) {
+        System.out.println("updateMyRating, userId is " + userid);
         Team076HodnotenieService hodnotenieService = new Team076HodnotenieService();
         Team076HodnoteniePortType hodnoteniePort = hodnotenieService.getTeam076HodnoteniePort();
         ArrayOfHodnotenies kaviaren_id = hodnoteniePort.getAll();
         List<Hodnotenies> hodnotenia = kaviaren_id.getHodnoteny();
         List<Hodnotenies> myRating = hodnotenia.stream()
-                .filter(item -> item.getZakaznikId() == this.userid)
+                .filter(item -> item.getZakaznikId() == this.userid && item.getKaviarenId() == cafe_id)
                 .collect(Collectors.toList());
 
         Hodnotenie hodnotenie;
         if (myRating.isEmpty()){
+            System.out.println("myRating is empty, inserting new instance");
             hodnotenie = new Hodnotenie();
             hodnotenie.setName("");
             hodnotenie.setKaviarenId(cafe_id);
@@ -181,13 +215,13 @@ public class CustomerPageController {
 
             hodnoteniePort.insert("076", "GS3kMb", hodnotenie);
         } else {
+            System.out.println("myRating is not empty, updateing an instance");
             Hodnotenies myCurrentRating = myRating.get(0);
             hodnotenie = new Hodnotenie();
             hodnotenie.setName("");
-            hodnotenie.setKaviarenId(myCurrentRating.getKaviarenId());
-            hodnotenie.setHodnota(myCurrentRating.getHodnota());
+            hodnotenie.setHodnota(myInputRating);
             hodnotenie.setBoloVidene(false);
-            hodnotenie.setZakaznikId(myCurrentRating.getZakaznikId());
+            hodnotenie.setId(myCurrentRating.getId());
 
             GregorianCalendar c = new GregorianCalendar();
             c.setTime(Calendar.getInstance().getTime());
@@ -197,7 +231,6 @@ public class CustomerPageController {
                 e.printStackTrace();
             }
 
-            myCurrentRating.setHodnota(myInputRating);
             hodnoteniePort.update("076", "GS3kMb", myCurrentRating.getId(), hodnotenie);
         }
 
@@ -255,8 +288,8 @@ public class CustomerPageController {
             return mojeHodnotenie.get();
         }
 
-        public void setMojeHodnotenie(String hodnotenie) {
-            this.mojeHodnotenie.set(hodnotenie);
+        public void setMojeHodnotenie(String mojeHodnotenie) {
+            this.mojeHodnotenie.set(mojeHodnotenie);
         }
     }
 
