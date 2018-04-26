@@ -11,23 +11,19 @@
    <children>
       <Pane layoutX="18.0" layoutY="14.0" prefHeight="527.0" prefWidth="865.0">
          <children>
-            <Label layoutX="49.0" layoutY="12.0" prefHeight="32.0" prefWidth="150.0" text="Zoznam kaviarni" textFill="#111111">
+            <Label layoutX="171.0" layoutY="14.0" prefHeight="32.0" prefWidth="150.0" text="Zoznam kaviarni" textFill="#111111">
                <font>
                   <Font size="20.0" />
                </font>
             </Label>
-            <TableView fx:id="cafes_tableview" layoutX="14.0" layoutY="44.0" prefHeight="194.0" prefWidth="222.0" />
+            <TableView fx:id="cafes_tableview" layoutX="14.0" layoutY="44.0" prefHeight="194.0" prefWidth="464.0" />
             <Label layoutX="73.0" layoutY="250.0" prefHeight="32.0" prefWidth="102.0" text="Notifikacie" textFill="#1b1a1a">
                <font>
                   <Font size="20.0" />
                </font>
             </Label>
             <TableView fx:id="notification_tableview" layoutX="14.0" layoutY="282.0" prefHeight="214.0" prefWidth="823.0" />
-            <TextField fx:id="adresa_textfield" layoutX="613.0" layoutY="42.0" />
-            <TextField fx:id="average_textfield" layoutX="613.0" layoutY="78.0" />
-            <Label layoutX="398.0" layoutY="48.0" text="Adresa" />
-            <Label layoutX="337.0" layoutY="84.0" prefHeight="27.0" prefWidth="191.0" text="Priemerne hodnotenie" />
-            <Button fx:id="notification_setting_button" layoutX="631.0" layoutY="211.0" mnemonicParsing="false" prefHeight="39.0" prefWidth="206.0" text="Nastavenie notifikacie" />
+            <Button fx:id="notification_setting_button" layoutX="617.0" layoutY="46.0" mnemonicParsing="false" prefHeight="194.0" prefWidth="206.0" text="Nastavenie notifikacie" />
          </children>
       </Pane>
    </children>

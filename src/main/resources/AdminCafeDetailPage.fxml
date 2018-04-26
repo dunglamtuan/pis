@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane prefHeight="682.0" prefWidth="1167.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sk.stuba.fiit.scenes.AdminCafeDetailPageController">
+   <children>
+      <Pane layoutX="14.0" layoutY="14.0" prefHeight="616.0" prefWidth="1139.0">
+         <children>
+            <Label layoutX="27.0" layoutY="32.0" text="Meno" />
+            <Label layoutX="27.0" layoutY="88.0" text="Adresa" />
+            <Label layoutX="27.0" layoutY="145.0" text="Priemerne hodnotenie" />
+            <TextField fx:id="name_textfield" layoutX="312.0" layoutY="26.0" />
+            <TextField fx:id="adress_textfield" layoutX="312.0" layoutY="82.0" />
+            <TextField fx:id="average_textfield" layoutX="312.0" layoutY="139.0" />
+            <Label layoutX="504.0" layoutY="214.0" text="Všetky hodnotenia" />
+            <TableView fx:id="all_rate_tableview" layoutX="27.0" layoutY="262.0" prefHeight="305.0" prefWidth="1097.0" />
+            <Button fx:id="back_button" layoutX="1083.0" layoutY="577.0" mnemonicParsing="false" text="Back" />
+         </children>
+      </Pane>
+   </children>
+</AnchorPane>

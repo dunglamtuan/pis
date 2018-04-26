@@ -7,7 +7,10 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.*;
+import javafx.scene.control.Button;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableRow;
+import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseButton;
 import javafx.scene.layout.AnchorPane;
@@ -15,7 +18,6 @@ import javafx.stage.Stage;
 import sk.stuba.fiit.labss2.pis.students.team076hodnotenie.Team076HodnoteniePortType;
 import sk.stuba.fiit.labss2.pis.students.team076hodnotenie.Team076HodnotenieService;
 import sk.stuba.fiit.labss2.pis.students.team076hodnotenie.types.ArrayOfHodnotenies;
-import sk.stuba.fiit.labss2.pis.students.team076hodnotenie.types.ArrayOfIds;
 import sk.stuba.fiit.labss2.pis.students.team076hodnotenie.types.Hodnotenies;
 import sk.stuba.fiit.labss2.pis.students.team076kaviaren.Team076KaviarenPortType;
 import sk.stuba.fiit.labss2.pis.students.team076kaviaren.Team076KaviarenService;
@@ -44,17 +46,11 @@ public class AdminPageController {
     TableView<NotificationData> notification_tableview;
 
     @FXML
-    TextField average_textfield;
-
-    @FXML
-    TextField adresa_textfield;
-
-    @FXML
     private void initialize(){
 
         notification_setting_button.setOnMouseClicked(event -> {
             String fxmlPath = "/NotificationPage.fxml";
-            creteNewWindow(fxmlPath);
+            creteNewWindow(fxmlPath,-1);
         });
 
         TableColumn name_column = new TableColumn("Meno");
@@ -79,15 +75,12 @@ public class AdminPageController {
                         && event.getClickCount() == 2) {
 
                     AllTableData clickedRow = row.getItem();
-                    adresa_textfield.setText(clickedRow.getAdresa());
-                    average_textfield.setText(clickedRow.getHodnotenie());
+                    String fxmlPath = "/AdminCafeDetailPage.fxml";
+                    creteNewWindow(fxmlPath, Integer.valueOf(clickedRow.getId()));
                 }
             });
             return row ;
         });
-
-        adresa_textfield.setEditable(false);
-        average_textfield.setEditable(false);
 
         initNotificationTable();
 
@@ -270,17 +263,24 @@ public class AdminPageController {
         }
     }
 
-    private void creteNewWindow(String fxmlPath) {
+    private void creteNewWindow(String fxmlPath, int cafeId) {
         FXMLLoader loader = new FXMLLoader();
         loader.setLocation(getClass().getResource(fxmlPath));
         try {
             Parent parent = (Parent) loader.load();
+
+            if (fxmlPath.contains("CafeDetail")) {
+                AdminCafeDetailPageController controller = loader.<AdminCafeDetailPageController>getController();
+                System.out.println("Contains worker");
+                controller.initialize(cafeId);
+            }
+
             AnchorPane root = (AnchorPane) parent;
             Stage stage = new Stage();
             Scene scene = new Scene(root);
             stage.setScene(scene);
             stage.show();
-            Stage s = (Stage) adresa_textfield.getScene().getWindow();
+            Stage s = (Stage) notification_setting_button.getScene().getWindow();
             s.close();
         } catch (IOException e) {
             e.printStackTrace();
