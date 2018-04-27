@@ -1,5 +1,6 @@
 package sk.stuba.fiit.scenes;
 
+import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -7,10 +8,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableRow;
-import javafx.scene.control.TableView;
+import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseButton;
 import javafx.scene.layout.AnchorPane;
@@ -18,6 +16,7 @@ import javafx.stage.Stage;
 import sk.stuba.fiit.labss2.pis.students.team076hodnotenie.Team076HodnoteniePortType;
 import sk.stuba.fiit.labss2.pis.students.team076hodnotenie.Team076HodnotenieService;
 import sk.stuba.fiit.labss2.pis.students.team076hodnotenie.types.ArrayOfHodnotenies;
+import sk.stuba.fiit.labss2.pis.students.team076hodnotenie.types.Hodnotenie;
 import sk.stuba.fiit.labss2.pis.students.team076hodnotenie.types.Hodnotenies;
 import sk.stuba.fiit.labss2.pis.students.team076kaviaren.Team076KaviarenPortType;
 import sk.stuba.fiit.labss2.pis.students.team076kaviaren.Team076KaviarenService;
@@ -32,6 +31,7 @@ import sk.stuba.fiit.labss2.pis.students.team076zakaznik.types.Zakaznik;
 
 import java.io.IOException;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 public class AdminPageController {
@@ -177,7 +177,45 @@ public class AdminPageController {
         notification_tableview.setItems(getTableNotifications());
         notification_tableview.getColumns().addAll(cafe_name_column, customer_name_column, rate_column, add_date_column);
 
+        notification_tableview.setRowFactory(tv -> {
+            TableRow<NotificationData> row = new TableRow();
+            row.setOnMouseClicked(event -> {
+                if (! row.isEmpty() && event.getButton()== MouseButton.PRIMARY
+                        && event.getClickCount() == 2) {
 
+                    NotificationData clickedRow = row.getItem();
+
+                    Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                    alert.setTitle("Hodnotenie");
+                    alert.setHeaderText("Kaviaren: " + clickedRow.getCafeName());
+                    String customerName = clickedRow.getCustomerName();
+                    alert.setContentText("Zakaznik: " +
+                            (customerName == null || customerName.isEmpty() ? "Anonym" : customerName) + "\n"+
+                    "Komentar: " + clickedRow.getComment());
+
+                    Optional<ButtonType> buttonType = alert.showAndWait();
+
+                    if(buttonType.get() == ButtonType.OK) {
+                        updateSeenHodnotenie(clickedRow.getRateId());
+                        notification_tableview.getItems().remove(clickedRow);
+                    }
+                    else if(buttonType.get() == ButtonType.CANCEL)
+                        alert.close();
+                }
+            });
+            return row ;
+        });
+
+    }
+
+    private void updateSeenHodnotenie(int id) {
+        Team076HodnotenieService service = new Team076HodnotenieService();
+        Team076HodnoteniePortType port = service.getTeam076HodnoteniePort();
+
+        Hodnotenie byId = port.getById(id);
+        byId.setBoloVidene(true);
+
+        port.update("076", "GS3kMb", byId.getId(), byId);
     }
 
     private ObservableList<NotificationData> getTableNotifications(){
@@ -209,25 +247,38 @@ public class AdminPageController {
 
             System.out.println(hodnotenies.getDatumPridania());
 
-            result.add(new NotificationData(kaviaren.getName(), zakaznik.getName(),
+            result.add(new NotificationData(hodnotenies.getId(), kaviaren.getName(), zakaznik.getName(),
                     String.valueOf(hodnotenies.getHodnota()),
-                    hodnotenies.getDatumPridania()!= null ? String.valueOf(hodnotenies.getDatumPridania()) : ""));
+                    hodnotenies.getDatumPridania()!= null ? String.valueOf(hodnotenies.getDatumPridania()) : "",
+                    hodnotenies.getKomentar()));
         }
 
         return result;
     }
 
     public static class NotificationData{
+        private final SimpleIntegerProperty rateId;
         private final SimpleStringProperty cafeName;
         private final SimpleStringProperty customerName;
         private final SimpleStringProperty rate;
         private final SimpleStringProperty date;
+        private final SimpleStringProperty comment;
 
-        public NotificationData(String cafeName, String customerName, String rate, String date) {
+        public NotificationData(int rateId, String cafeName, String customerName, String rate, String date, String comment) {
+            this.rateId = new SimpleIntegerProperty(rateId);
             this.cafeName = new SimpleStringProperty(cafeName);
             this.customerName = new SimpleStringProperty(customerName);
             this.rate = new SimpleStringProperty(rate);
             this.date = new SimpleStringProperty(date);
+            this.comment = new SimpleStringProperty(comment);
+        }
+
+        public Integer getRateId() {
+            return rateId.get();
+        }
+
+        public void setRateId(Integer cafeId) {
+            this.rateId.set(cafeId);
         }
 
         public String getCafeName() {
@@ -260,6 +311,14 @@ public class AdminPageController {
 
         public void setDate(String date) {
             this.date.set(date);
+        }
+
+        public String getComment() {
+            return comment.get();
+        }
+
+        public void setComment(String comment) {
+            this.comment.set(comment);
         }
     }
 
