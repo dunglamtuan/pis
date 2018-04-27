@@ -63,6 +63,9 @@ public class CustomerPageController {
     Label succ_label;
 
     @FXML
+    TextArea comment_textarea;
+
+    @FXML
     void initialize(int userid){
         this.userid = userid;
 
@@ -105,6 +108,7 @@ public class CustomerPageController {
                     adresa_textfield.setText(clickedRow.getAdresa());
                     priemer_textfield.setText(clickedRow.getHodnotenie());
                     mojehod_textfield.setText(clickedRow.getMojeHodnotenie());
+                    comment_textarea.setText(clickedRow.getKomentar());
                 }
             });
             return row ;
@@ -151,7 +155,8 @@ public class CustomerPageController {
             System.out.println("Primer: "+String.valueOf(getAverageByCafeId(allHodnotenia, kaviarenId)));
             result.add(new MyTableData(String.valueOf(kaviarenId), getCafeNameByCafeId(allKaviaren, kaviarenId),
                     getCafeAddressByCafeId(allKaviaren, kaviarenId), String.valueOf(getAverageByCafeId(allHodnotenia, kaviarenId)),
-                    String.valueOf(getMyRateByCafeId(allHodnotenia, kaviarenId)<= 0 ? "" : (getMyRateByCafeId(allHodnotenia, kaviarenId)))));
+                    String.valueOf(getMyRateByCafeId(allHodnotenia, kaviarenId)<= 0 ? "" : (getMyRateByCafeId(allHodnotenia, kaviarenId))),
+                    getMyCommentByCafeId(allHodnotenia, kaviarenId)));
         }
 
         return result;
@@ -175,6 +180,18 @@ public class CustomerPageController {
         else
             return collectMyRate.get(0).getHodnota();
 
+    }
+
+    private String getMyCommentByCafeId(List<Hodnotenies> allHodnotenia, int cafeId) {
+        List<Hodnotenies> collectMyRate = allHodnotenia
+                .stream()
+                .filter(item -> item.getKaviarenId() == cafeId && item.getZakaznikId() == userid)
+                .collect(Collectors.toList());
+
+        if (collectMyRate.isEmpty())
+            return "";
+        else
+            return collectMyRate.get(0).getKomentar();
     }
 
     private String getCafeNameByCafeId(List<Kaviarens> allKaviaren, int cafeId) {
@@ -204,6 +221,7 @@ public class CustomerPageController {
             hodnotenie.setHodnota(myInputRating);
             hodnotenie.setBoloVidene(false);
             hodnotenie.setZakaznikId(this.userid);
+            hodnotenie.setKomentar(comment_textarea.getText());
 
             GregorianCalendar c = new GregorianCalendar();
             c.setTime(Calendar.getInstance().getTime());
@@ -218,10 +236,12 @@ public class CustomerPageController {
             System.out.println("myRating is not empty, updateing an instance");
             Hodnotenies myCurrentRating = myRating.get(0);
             hodnotenie = new Hodnotenie();
-            hodnotenie.setName("");
             hodnotenie.setHodnota(myInputRating);
             hodnotenie.setBoloVidene(false);
             hodnotenie.setId(myCurrentRating.getId());
+            hodnotenie.setZakaznikId(myCurrentRating.getZakaznikId());
+            hodnotenie.setKaviarenId(myCurrentRating.getKaviarenId());
+
 
             GregorianCalendar c = new GregorianCalendar();
             c.setTime(Calendar.getInstance().getTime());
@@ -230,6 +250,7 @@ public class CustomerPageController {
             } catch (DatatypeConfigurationException e) {
                 e.printStackTrace();
             }
+            hodnotenie.setKomentar(comment_textarea.getText());
 
             hodnoteniePort.update("076", "GS3kMb", myCurrentRating.getId(), hodnotenie);
         }
@@ -243,13 +264,15 @@ public class CustomerPageController {
         private final SimpleStringProperty adresa;
         private final SimpleStringProperty hodnotenie;
         private final SimpleStringProperty mojeHodnotenie;
+        private final SimpleStringProperty komentar;
 
-        MyTableData(String id, String name, String adresa, String hodnotenie, String mojehod) {
+        MyTableData(String id, String name, String adresa, String hodnotenie, String mojehod, String komentar) {
             this.id = new SimpleStringProperty(id);
             this.name = new SimpleStringProperty(name);
             this.adresa = new SimpleStringProperty(adresa);
             this.hodnotenie = new SimpleStringProperty(hodnotenie);
             this.mojeHodnotenie = new SimpleStringProperty(mojehod);
+            this.komentar = new SimpleStringProperty(komentar);
         }
 
         public String getId() {
@@ -290,6 +313,14 @@ public class CustomerPageController {
 
         public void setMojeHodnotenie(String mojeHodnotenie) {
             this.mojeHodnotenie.set(mojeHodnotenie);
+        }
+
+        public String getKomentar() {
+            return komentar.get();
+        }
+
+        public void setKomentar(String komentar) {
+            this.komentar.set(komentar);
         }
     }
 

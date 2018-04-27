@@ -69,23 +69,28 @@ public class AdminCafeDetailPageController {
         for (Hodnotenies hodnotenie : hodnoteniaList) {
             result.add(new CafeRateData(String.valueOf(hodnotenie.getZakaznikId()),
                     String.valueOf(hodnotenie.getHodnota()),
-                    hodnotenie.getDatumPridania()!= null ? String.valueOf(hodnotenie.getDatumPridania()) : ""));
+                    hodnotenie.getDatumPridania()!= null ? String.valueOf(hodnotenie.getDatumPridania()) : "",
+                    hodnotenie.getKomentar()));
         }
 
         TableColumn zakaznik_column = new TableColumn("Zakaznik");
-        zakaznik_column.setPrefWidth(all_rate_tableview.getPrefWidth()/3);
+        zakaznik_column.setPrefWidth(all_rate_tableview.getPrefWidth()/4);
         zakaznik_column.setCellValueFactory(new PropertyValueFactory<CafeRateData, String>("zakaznikId"));
 
         TableColumn hodnota_column = new TableColumn("Hodnota");
-        hodnota_column.setPrefWidth(all_rate_tableview.getPrefWidth()/3);
+        hodnota_column.setPrefWidth(all_rate_tableview.getPrefWidth()/4);
         hodnota_column.setCellValueFactory(new PropertyValueFactory<CafeRateData, String>("hodnota"));
 
         TableColumn date_column = new TableColumn("Datum pridania");
-        date_column.setPrefWidth(all_rate_tableview.getPrefWidth()/3);
+        date_column.setPrefWidth(all_rate_tableview.getPrefWidth()/4);
         date_column.setCellValueFactory(new PropertyValueFactory<CafeRateData, String>("datumPridania"));
 
+        TableColumn comment_column = new TableColumn("Komentar");
+        comment_column.setPrefWidth(all_rate_tableview.getPrefWidth()/4);
+        date_column.setCellValueFactory(new PropertyValueFactory<CafeRateData, String>("komentar"));
+
         all_rate_tableview.setItems(result);
-        all_rate_tableview.getColumns().addAll(zakaznik_column, hodnota_column, date_column);
+        all_rate_tableview.getColumns().addAll(zakaznik_column, hodnota_column, date_column, comment_column);
 
         fillCafeBasicDetail(hodnoteniaList);
     }
@@ -95,11 +100,13 @@ public class AdminCafeDetailPageController {
         private final SimpleStringProperty zakaznikId;
         private final SimpleStringProperty  hodnota;
         private final SimpleStringProperty  datumPridania;
+        private final SimpleStringProperty komentar;
 
-        public CafeRateData(String zakaznik_id, String hodnota, String datumPridania) {
+        public CafeRateData(String zakaznik_id, String hodnota, String datumPridania, String komentar) {
             this.zakaznikId = new SimpleStringProperty(zakaznik_id);
             this.hodnota = new SimpleStringProperty(hodnota);
             this.datumPridania = new SimpleStringProperty(datumPridania);
+            this.komentar = new SimpleStringProperty(komentar);
         }
 
         public String getZakaznikId() {
@@ -124,6 +131,14 @@ public class AdminCafeDetailPageController {
 
         public void setDatumPridania(String datumPridania) {
             this.datumPridania.set(datumPridania);
+        }
+
+        public String getKomentar() {
+            return komentar.get();
+        }
+
+        public void setKomentar(String komentar) {
+            this.komentar.set(komentar);
         }
     }
 

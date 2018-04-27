@@ -49,27 +49,11 @@ public class ObjectFactory {
     }
 
     /**
-     * Create an instance of {@link InsertResponse }
+     * Create an instance of {@link Insert }
      * 
      */
-    public InsertResponse createInsertResponse() {
-        return new InsertResponse();
-    }
-
-    /**
-     * Create an instance of {@link GetByIdResponse }
-     * 
-     */
-    public GetByIdResponse createGetByIdResponse() {
-        return new GetByIdResponse();
-    }
-
-    /**
-     * Create an instance of {@link GetAllResponse }
-     * 
-     */
-    public GetAllResponse createGetAllResponse() {
-        return new GetAllResponse();
+    public Insert createInsert() {
+        return new Insert();
     }
 
     /**
@@ -81,35 +65,11 @@ public class ObjectFactory {
     }
 
     /**
-     * Create an instance of {@link GetAll }
+     * Create an instance of {@link InsertResponse }
      * 
      */
-    public GetAll createGetAll() {
-        return new GetAll();
-    }
-
-    /**
-     * Create an instance of {@link Insert }
-     * 
-     */
-    public Insert createInsert() {
-        return new Insert();
-    }
-
-    /**
-     * Create an instance of {@link GetById }
-     * 
-     */
-    public GetById createGetById() {
-        return new GetById();
-    }
-
-    /**
-     * Create an instance of {@link ArrayOfZakazniks }
-     * 
-     */
-    public ArrayOfZakazniks createArrayOfZakazniks() {
-        return new ArrayOfZakazniks();
+    public InsertResponse createInsertResponse() {
+        return new InsertResponse();
     }
 
     /**
@@ -129,51 +89,19 @@ public class ObjectFactory {
     }
 
     /**
-     * Create an instance of {@link Zakazniks }
+     * Create an instance of {@link GetByIdResponse }
      * 
      */
-    public Zakazniks createZakazniks() {
-        return new Zakazniks();
+    public GetByIdResponse createGetByIdResponse() {
+        return new GetByIdResponse();
     }
 
     /**
-     * Create an instance of {@link UpdateResponse }
+     * Create an instance of {@link GetById }
      * 
      */
-    public UpdateResponse createUpdateResponse() {
-        return new UpdateResponse();
-    }
-
-    /**
-     * Create an instance of {@link Update }
-     * 
-     */
-    public Update createUpdate() {
-        return new Update();
-    }
-
-    /**
-     * Create an instance of {@link GetByAttributeValue }
-     * 
-     */
-    public GetByAttributeValue createGetByAttributeValue() {
-        return new GetByAttributeValue();
-    }
-
-    /**
-     * Create an instance of {@link Zakaznik }
-     * 
-     */
-    public Zakaznik createZakaznik() {
-        return new Zakaznik();
-    }
-
-    /**
-     * Create an instance of {@link Delete }
-     * 
-     */
-    public Delete createDelete() {
-        return new Delete();
+    public GetById createGetById() {
+        return new GetById();
     }
 
     /**
@@ -185,11 +113,83 @@ public class ObjectFactory {
     }
 
     /**
+     * Create an instance of {@link GetAll }
+     * 
+     */
+    public GetAll createGetAll() {
+        return new GetAll();
+    }
+
+    /**
+     * Create an instance of {@link GetByAttributeValue }
+     * 
+     */
+    public GetByAttributeValue createGetByAttributeValue() {
+        return new GetByAttributeValue();
+    }
+
+    /**
      * Create an instance of {@link ArrayOfIds }
      * 
      */
     public ArrayOfIds createArrayOfIds() {
         return new ArrayOfIds();
+    }
+
+    /**
+     * Create an instance of {@link Update }
+     * 
+     */
+    public Update createUpdate() {
+        return new Update();
+    }
+
+    /**
+     * Create an instance of {@link UpdateResponse }
+     * 
+     */
+    public UpdateResponse createUpdateResponse() {
+        return new UpdateResponse();
+    }
+
+    /**
+     * Create an instance of {@link Zakaznik }
+     * 
+     */
+    public Zakaznik createZakaznik() {
+        return new Zakaznik();
+    }
+
+    /**
+     * Create an instance of {@link ArrayOfZakazniks }
+     * 
+     */
+    public ArrayOfZakazniks createArrayOfZakazniks() {
+        return new ArrayOfZakazniks();
+    }
+
+    /**
+     * Create an instance of {@link GetAllResponse }
+     * 
+     */
+    public GetAllResponse createGetAllResponse() {
+        return new GetAllResponse();
+    }
+
+    /**
+     * Create an instance of {@link Delete }
+     * 
+     */
+    public Delete createDelete() {
+        return new Delete();
+    }
+
+    /**
+     * Create an instance of {@link Zakazniks }
+     * 
+     */
+    public Zakazniks createZakazniks() {
+        return new Zakazniks();
     }
 
     /**

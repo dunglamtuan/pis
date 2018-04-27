@@ -13,18 +13,18 @@
 
 <AnchorPane prefHeight="428.0" prefWidth="1067.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sk.stuba.fiit.scenes.GuestPageController">
    <children>
-      <Pane layoutX="3.0" layoutY="53.0" prefHeight="347.0" prefWidth="1054.0">
+      <Pane layoutX="3.0" layoutY="53.0" prefHeight="369.0" prefWidth="1054.0">
          <children>
-            <TableView fx:id="cafes_table" layoutX="14.0" layoutY="14.0" prefHeight="292.0" prefWidth="461.0" />
-            <TextField fx:id="adresa_textfield" layoutX="788.0" layoutY="24.0" />
-            <TextField fx:id="average_rate_textfield" layoutX="788.0" layoutY="68.0" />
-            <TextField fx:id="my_rate" layoutX="788.0" layoutY="206.0" />
-            <Button fx:id="send_rating_button" layoutX="788.0" layoutY="252.0" mnemonicParsing="false" text="Odosli hodnotenie" />
-            <Label layoutX="554.0" layoutY="44.0" text="Adresa" />
-            <Label layoutX="493.0" layoutY="80.0" text="Priemerne hodnotenie" />
-            <Label layoutX="519.0" layoutY="226.0" text="Moje odnotenie" />
-            <Label fx:id="info_label" layoutX="853.0" layoutY="312.0" text="Label" textFill="#eb0404" />
-            <Button fx:id="back_button" layoutX="14.0" layoutY="306.0" mnemonicParsing="false" text="Spat" />
+            <TableView fx:id="cafes_table" layoutX="14.0" layoutY="14.0" prefHeight="306.0" prefWidth="461.0" />
+            <TextField fx:id="adresa_textfield" layoutX="788.0" layoutY="24.0" prefHeight="25.0" prefWidth="216.0" />
+            <TextField fx:id="my_rate" layoutX="788.0" layoutY="74.0" prefHeight="25.0" prefWidth="216.0" />
+            <Button fx:id="send_rating_button" layoutX="788.0" layoutY="272.0" mnemonicParsing="false" text="Odosli hodnotenie" />
+            <Label layoutX="572.0" layoutY="37.0" text="Adresa" />
+            <Label layoutX="548.0" layoutY="78.0" text="Moje odnotenie" />
+            <Label fx:id="info_label" layoutX="831.0" layoutY="320.0" text="Label" textFill="#eb0404" />
+            <Button fx:id="back_button" layoutX="14.0" layoutY="321.0" mnemonicParsing="false" text="Spat" />
+            <TextArea fx:id="comment_textarea" layoutX="788.0" layoutY="113.0" prefHeight="144.0" prefWidth="216.0" />
+            <Label layoutX="564.0" layoutY="177.0" text="Komentar" />
          </children>
       </Pane>
       <Label layoutX="154.0" layoutY="26.0" prefHeight="27.0" prefWidth="136.0" text="Zoznam kaviarni" textFill="#05f815">

@@ -41,9 +41,6 @@ public class GuestPageController {
     TextField adresa_textfield;
 
     @FXML
-    TextField average_rate_textfield;
-
-    @FXML
     TextArea comment_textarea;
 
     @FXML
@@ -61,17 +58,16 @@ public class GuestPageController {
     @FXML
     private void initialize(){
         adresa_textfield.setEditable(false);
-        average_rate_textfield.setEditable(false);
 
         TableColumn adresa_column = new TableColumn("Adresa");
         adresa_column.setCellValueFactory(new PropertyValueFactory<TableData, String>("adresa"));
 
-        TableColumn rate_column = new TableColumn("Priemerne hodnotenie");
-        rate_column.setCellValueFactory(new PropertyValueFactory<TableData, String>("hodnotenie"));
+        TableColumn name_column = new TableColumn("Meno");
+        name_column.setCellValueFactory(new PropertyValueFactory<TableData, String>("name"));
 
         //ObservableList<TableData> result = FXCollections.observableArrayList(new TableData("0", "asdasd"));
         cafes_table.setItems(getTableDate());
-        cafes_table.getColumns().addAll(adresa_column,rate_column);
+        cafes_table.getColumns().addAll(adresa_column, name_column);
 
         cafes_table.setRowFactory(tv -> {
             TableRow<TableData> row = new TableRow();
@@ -82,7 +78,6 @@ public class GuestPageController {
                     TableData clickedRow = row.getItem();
                     cafe_id = Integer.valueOf(clickedRow.getId());
                     adresa_textfield.setText(clickedRow.getAdresa());
-                    average_rate_textfield.setText(clickedRow.getHodnotenie());
                 }
             });
             return row ;
@@ -114,6 +109,7 @@ public class GuestPageController {
         hodnotenie.setBoloVidene(false);
         hodnotenie.setHodnota(rating);
         hodnotenie.setKaviarenId(cafe_id);
+        hodnotenie.setKomentar(comment_textarea.getText());
 
         GregorianCalendar c = new GregorianCalendar();
         c.setTime(Calendar.getInstance().getTime());
@@ -150,7 +146,7 @@ public class GuestPageController {
                 average = (double) sum / collect.size();
 
 
-            result.add(new TableData(String.valueOf(kaviaren.getId()), kaviaren.getAdresa(), String.valueOf(average)));
+            result.add(new TableData(String.valueOf(kaviaren.getId()),kaviaren.getName(), kaviaren.getAdresa(), String.valueOf(average)));
         }
 
         return result;
@@ -159,13 +155,15 @@ public class GuestPageController {
     public static class TableData{
 
         private final SimpleStringProperty id;
+        private final SimpleStringProperty name;
         private final SimpleStringProperty  adresa;
         private final SimpleStringProperty  hodnotenie;
 
-        TableData(String id, String adresa, String hodnotenie) {
+        TableData(String id, String name, String adresa, String hodnotenie) {
             this.id = new SimpleStringProperty(id);
             this.adresa = new SimpleStringProperty(adresa);
             this.hodnotenie = new SimpleStringProperty(hodnotenie);
+            this.name = new SimpleStringProperty(name);
         }
 
         public String getId() {
@@ -190,6 +188,14 @@ public class GuestPageController {
 
         public void setHodnotenie(String hodnotenie) {
             this.hodnotenie.set(hodnotenie);
+        }
+
+        public String getName() {
+            return name.get();
+        }
+
+        public void setName(String name){
+            this.name.set(name);
         }
     }
 

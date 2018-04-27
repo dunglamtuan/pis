@@ -37,19 +37,19 @@ public class ObjectFactory {
     }
 
     /**
-     * Create an instance of {@link ValidateEmailResponse }
-     * 
-     */
-    public ValidateEmailResponse createValidateEmailResponse() {
-        return new ValidateEmailResponse();
-    }
-
-    /**
      * Create an instance of {@link ValidatePhone }
      * 
      */
     public ValidatePhone createValidatePhone() {
         return new ValidatePhone();
+    }
+
+    /**
+     * Create an instance of {@link ValidateEmail }
+     * 
+     */
+    public ValidateEmail createValidateEmail() {
+        return new ValidateEmail();
     }
 
     /**
@@ -61,11 +61,11 @@ public class ObjectFactory {
     }
 
     /**
-     * Create an instance of {@link ValidateEmail }
+     * Create an instance of {@link ValidateEmailResponse }
      * 
      */
-    public ValidateEmail createValidateEmail() {
-        return new ValidateEmail();
+    public ValidateEmailResponse createValidateEmailResponse() {
+        return new ValidateEmailResponse();
     }
 
     /**

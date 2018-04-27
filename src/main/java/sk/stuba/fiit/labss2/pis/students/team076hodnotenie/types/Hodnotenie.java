@@ -26,6 +26,7 @@ import javax.xml.datatype.XMLGregorianCalendar;
  *         &lt;element name="hodnota" type="{http://www.w3.org/2001/XMLSchema}int"/>
  *         &lt;element name="datum_pridania" type="{http://www.w3.org/2001/XMLSchema}date"/>
  *         &lt;element name="bolo_videne" type="{http://www.w3.org/2001/XMLSchema}boolean"/>
+ *         &lt;element name="komentar" type="{http://www.w3.org/2001/XMLSchema}string"/>
  *       &lt;/sequence>
  *     &lt;/restriction>
  *   &lt;/complexContent>
@@ -42,7 +43,8 @@ import javax.xml.datatype.XMLGregorianCalendar;
     "kaviarenId",
     "hodnota",
     "datumPridania",
-    "boloVidene"
+    "boloVidene",
+    "komentar"
 })
 public class Hodnotenie {
 
@@ -59,6 +61,8 @@ public class Hodnotenie {
     protected XMLGregorianCalendar datumPridania;
     @XmlElement(name = "bolo_videne")
     protected boolean boloVidene;
+    @XmlElement(required = true)
+    protected String komentar;
 
     /**
      * Gets the value of the id property.
@@ -186,6 +190,30 @@ public class Hodnotenie {
      */
     public void setBoloVidene(boolean value) {
         this.boloVidene = value;
+    }
+
+    /**
+     * Gets the value of the komentar property.
+     * 
+     * @return
+     *     possible object is
+     *     {@link String }
+     *     
+     */
+    public String getKomentar() {
+        return komentar;
+    }
+
+    /**
+     * Sets the value of the komentar property.
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link String }
+     *     
+     */
+    public void setKomentar(String value) {
+        this.komentar = value;
     }
 
 }
