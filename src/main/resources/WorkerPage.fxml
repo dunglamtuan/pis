@@ -1,28 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
-<?import javafx.scene.text.*?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="296.0" prefWidth="482.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sk.stuba.fiit.scenes.WorkerPageController">
+<AnchorPane prefHeight="262.0" prefWidth="468.0" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sk.stuba.fiit.scenes.WorkerPageController">
    <children>
-      <Pane layoutX="76.0" layoutY="31.0" prefHeight="234.0" prefWidth="330.0">
-         <children>
-            <Button fx:id="registration_button" layoutX="76.0" layoutY="67.0" mnemonicParsing="false" prefHeight="35.0" prefWidth="206.0" text="Registracia" />
-            <Button fx:id="add_to_account_button" layoutX="76.0" layoutY="132.0" mnemonicParsing="false" prefHeight="35.0" prefWidth="206.0" text="Pridelenie na ucet" />
-            <Button fx:id="logout_button" layoutX="133.0" layoutY="185.0" mnemonicParsing="false" prefHeight="35.0" prefWidth="92.0" style="-fx-background-color: red;" text="Odhlasit sa" />
-            <Label layoutX="128.0" text="Vyber akcie" textFill="#e40101">
-               <font>
-                  <Font size="20.0" />
-               </font>
-            </Label>
-         </children>
-      </Pane>
+      <Button fx:id="registration_button" layoutX="131.0" layoutY="89.0" mnemonicParsing="false" prefHeight="35.0" prefWidth="206.0" text="Registrácia" />
+      <Button fx:id="add_to_account_button" layoutX="131.0" layoutY="140.0" mnemonicParsing="false" prefHeight="35.0" prefWidth="206.0" text="Pridelenie účtu ku karte" />
+      <Button fx:id="logout_button" layoutX="22.0" layoutY="210.0" mnemonicParsing="false" prefHeight="35.0" prefWidth="102.0" text="Odhlásiť sa" />
+      <Label layoutX="183.0" layoutY="22.0" text="Výber akcie">
+         <font>
+            <Font name="System Bold" size="20.0" />
+         </font>
+      </Label>
    </children>
 </AnchorPane>
