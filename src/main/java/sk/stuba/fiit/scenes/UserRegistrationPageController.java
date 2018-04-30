@@ -78,13 +78,13 @@ public class UserRegistrationPageController {
             String pass = pass_textfield.getText();
 
             if (!validateEmailInput(email_input)){
-                mail_error_label.setText("Neplatna emailova adresa");
+                mail_error_label.setText("Neplatná emailová adresa");
                 mail_error_label.setVisible(true);
             } else if (isCardIdExisted(Integer.valueOf(cardd_input))){
-                mail_error_label.setText("Cislo karty uz existuje");
+                mail_error_label.setText("Číslo karty už existuje");
                 mail_error_label.setVisible(true);
             } else if (isCardInputAsKaviarenId(Integer.valueOf(cardd_input))){
-                mail_error_label.setText("Cislo karty uz existuje");
+                mail_error_label.setText("Číslo karty už existuje");
                 mail_error_label.setVisible(true);
             } else {
                 registerNewUser(nameInput, email_input, cardd_input, pass);

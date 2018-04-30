@@ -62,7 +62,7 @@ public class LoginPageController {
                 creteNewWindow(fxmlPath);
             }
             else {
-                error_label.setText("Zle udaje!");
+                error_label.setText("Nesprávne ID alebo heslo!");
                 error_label.setVisible(true);
             }
 
