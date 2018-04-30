@@ -1,30 +1,25 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.text.*?>
-<?import java.lang.*?>
-<?import java.util.*?>
-<?import javafx.scene.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="559.0" prefWidth="899.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sk.stuba.fiit.scenes.AdminPageController">
+<AnchorPane prefHeight="559.0" prefWidth="899.0" xmlns="http://javafx.com/javafx/9.0.4" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sk.stuba.fiit.scenes.AdminPageController">
    <children>
-      <Pane layoutX="18.0" layoutY="14.0" prefHeight="527.0" prefWidth="865.0">
-         <children>
-            <Label layoutX="171.0" layoutY="14.0" prefHeight="32.0" prefWidth="150.0" text="Zoznam kaviarni" textFill="#111111">
-               <font>
-                  <Font size="20.0" />
-               </font>
-            </Label>
-            <TableView fx:id="cafes_tableview" layoutX="14.0" layoutY="44.0" prefHeight="194.0" prefWidth="464.0" />
-            <Label layoutX="73.0" layoutY="250.0" prefHeight="32.0" prefWidth="102.0" text="Notifikacie" textFill="#1b1a1a">
-               <font>
-                  <Font size="20.0" />
-               </font>
-            </Label>
-            <TableView fx:id="notification_tableview" layoutX="14.0" layoutY="282.0" prefHeight="214.0" prefWidth="823.0" />
-            <Button fx:id="notification_setting_button" layoutX="617.0" layoutY="46.0" mnemonicParsing="false" prefHeight="194.0" prefWidth="206.0" text="Nastavenie notifikacie" />
-         </children>
-      </Pane>
+      <Label layoutX="38.0" layoutY="16.0" prefHeight="32.0" prefWidth="172.0" text="Zoznam kaviarní" textFill="#111111">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </Label>
+      <TableView fx:id="cafes_tableview" layoutX="38.0" layoutY="52.0" prefHeight="194.0" prefWidth="823.0" />
+      <Label layoutX="38.0" layoutY="264.0" prefHeight="32.0" prefWidth="102.0" text="Notifikácie" textFill="#1b1a1a">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </Label>
+      <TableView fx:id="notification_tableview" layoutX="38.0" layoutY="305.0" prefHeight="186.0" prefWidth="823.0" />
+      <Button fx:id="notification_setting_button" layoutX="655.0" layoutY="504.0" mnemonicParsing="false" prefHeight="32.0" prefWidth="206.0" text="Nastavenie notifikácií" />
    </children>
 </AnchorPane>

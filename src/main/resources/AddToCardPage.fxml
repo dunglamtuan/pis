@@ -1,31 +1,22 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
-<?import javafx.scene.text.*?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="300.0" prefWidth="468.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sk.stuba.fiit.scenes.AddToCardPageController">
+<AnchorPane prefHeight="300.0" prefWidth="468.0" xmlns="http://javafx.com/javafx/9.0.4" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sk.stuba.fiit.scenes.AddToCardPageController">
    <children>
-      <Pane layoutX="83.0" layoutY="82.0" prefHeight="164.0" prefWidth="302.0">
-         <children>
-            <Button fx:id="confirm_button" layoutX="103.0" layoutY="123.0" mnemonicParsing="false" prefHeight="27.0" prefWidth="96.0" text="Potvrdit" />
-            <TextField fx:id="cardid_textfield" layoutX="103.0" layoutY="41.0" prefHeight="27.0" prefWidth="173.0" />
-            <Label layoutX="14.0" layoutY="46.0" text="Cislo karty" />
-            <Button fx:id="back_button" layoutX="14.0" layoutY="124.0" mnemonicParsing="false" text="Spat" />
-            <Label fx:id="error_label" layoutX="137.0" layoutY="74.0" text="Cislo kary neexistuje" textFill="#fc0606" />
-         </children>
-      </Pane>
-      <Label layoutX="158.0" layoutY="39.0" prefHeight="17.0" prefWidth="152.0" text="Pridanie na ucet" textFill="#09f805">
+      <Button fx:id="back_button" layoutX="14.0" layoutY="259.0" mnemonicParsing="false" text="Späť" />
+      <TextField fx:id="cardid_textfield" layoutX="148.0" layoutY="127.0" prefHeight="27.0" prefWidth="173.0" />
+      <Label layoutX="202.0" layoutY="110.0" text="Číslo karty" />
+      <Label alignment="CENTER" layoutX="113.0" layoutY="56.0" prefHeight="26.0" prefWidth="243.0" text="Priradenie účtu ku karte">
          <font>
-            <Font size="20.0" />
+            <Font name="System Bold" size="20.0" />
          </font>
       </Label>
+      <Button fx:id="confirm_button" layoutX="186.0" layoutY="190.0" mnemonicParsing="false" prefHeight="27.0" prefWidth="96.0" text="Potvrdiť" />
+      <Label fx:id="error_label" layoutX="169.0" layoutY="154.0" text="Číslo karty neexistuje" textFill="#fc0606" />
    </children>
 </AnchorPane>

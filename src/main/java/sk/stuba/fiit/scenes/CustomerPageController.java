@@ -45,10 +45,10 @@ public class CustomerPageController {
     TableView my_cofes_tableview;
 
     @FXML
-    TextField adresa_textfield;
+    Label adresa_label;
 
     @FXML
-    TextField priemer_textfield;
+    Label priemer_label;
 
     @FXML
     TextField mojehod_textfield;
@@ -66,30 +66,28 @@ public class CustomerPageController {
     TextArea comment_textarea;
 
     @FXML
-    void initialize(int userid){
+    void initialize(int userid) {
         this.userid = userid;
 
         my_cofes_tableview.getColumns().clear();
         my_cofes_tableview.getItems().clear();
 
-        adresa_textfield.setEditable(false);
-        priemer_textfield.setEditable(false);
         succ_label.setVisible(false);
 
         TableColumn name_column = new TableColumn("Meno");
-        name_column.setPrefWidth(my_cofes_tableview.getPrefWidth()/4);
+        name_column.setPrefWidth(my_cofes_tableview.getPrefWidth() / 4);
         name_column.setCellValueFactory(new PropertyValueFactory<MyTableData, String>("name"));
 
         TableColumn adresa_column = new TableColumn("Adresa");
-        adresa_column.setPrefWidth(my_cofes_tableview.getPrefWidth()/4);
+        adresa_column.setPrefWidth(my_cofes_tableview.getPrefWidth() / 4);
         adresa_column.setCellValueFactory(new PropertyValueFactory<MyTableData, String>("adresa"));
 
         TableColumn rate_column = new TableColumn("Priemerne hodnotenie");
-        rate_column.setPrefWidth(my_cofes_tableview.getPrefWidth()/4);
+        rate_column.setPrefWidth(my_cofes_tableview.getPrefWidth() / 4);
         rate_column.setCellValueFactory(new PropertyValueFactory<MyTableData, String>("hodnotenie"));
 
         TableColumn my_rate_column = new TableColumn("Moje hodnotenie");
-        my_rate_column.setPrefWidth(my_cofes_tableview.getPrefWidth()/4);
+        my_rate_column.setPrefWidth(my_cofes_tableview.getPrefWidth() / 4);
         my_rate_column.setCellValueFactory(new PropertyValueFactory<MyTableData, String>("mojeHodnotenie"));
 
         //ObservableList<TableData> result = FXCollections.observableArrayList(new TableData("0", "asdasd"));
@@ -99,22 +97,22 @@ public class CustomerPageController {
         my_cofes_tableview.setRowFactory(tv -> {
             TableRow<MyTableData> row = new TableRow();
             row.setOnMouseClicked(event -> {
-                if (! row.isEmpty() && event.getButton()== MouseButton.PRIMARY
+                if (!row.isEmpty() && event.getButton() == MouseButton.PRIMARY
                         && event.getClickCount() == 2) {
 
                     MyTableData clickedRow = row.getItem();
                     cafe_id = Integer.valueOf(clickedRow.getId());
                     System.out.println("CafeId is: " + cafe_id);
-                    adresa_textfield.setText(clickedRow.getAdresa());
-                    priemer_textfield.setText(clickedRow.getHodnotenie());
+                    adresa_label.setText(clickedRow.getAdresa());
+                    priemer_label.setText(clickedRow.getHodnotenie());
                     mojehod_textfield.setText(clickedRow.getMojeHodnotenie());
                     comment_textarea.setText(clickedRow.getKomentar());
                 }
             });
-            return row ;
+            return row;
         });
 
-        adresa_textfield.textProperty().addListener((observable, oldValue, newValue) -> {
+        adresa_label.textProperty().addListener((observable, oldValue, newValue) -> {
             succ_label.setVisible(false);
         });
 
@@ -133,7 +131,7 @@ public class CustomerPageController {
 
     }
 
-    private ObservableList<MyTableData> getTableDate(){
+    private ObservableList<MyTableData> getTableDate() {
         Team076NavstevaService navstevaService = new Team076NavstevaService();
         Team076NavstevaPortType navstevaPort = navstevaService.getTeam076NavstevaPort();
         ArrayOfNavstevas zakaznik_id = navstevaPort.getByAttributeValue("zakaznik_id", String.valueOf(this.userid), new ArrayOfIds());
@@ -152,10 +150,10 @@ public class CustomerPageController {
         ObservableList<MyTableData> result = FXCollections.observableArrayList();
         for (Navstevas navsteva : navstevaListByUserId) {
             int kaviarenId = navsteva.getKaviarenId();
-            System.out.println("Primer: "+String.valueOf(getAverageByCafeId(allHodnotenia, kaviarenId)));
+            System.out.println("Primer: " + String.valueOf(getAverageByCafeId(allHodnotenia, kaviarenId)));
             result.add(new MyTableData(String.valueOf(kaviarenId), getCafeNameByCafeId(allKaviaren, kaviarenId),
                     getCafeAddressByCafeId(allKaviaren, kaviarenId), String.valueOf(getAverageByCafeId(allHodnotenia, kaviarenId)),
-                    String.valueOf(getMyRateByCafeId(allHodnotenia, kaviarenId)<= 0 ? "" : (getMyRateByCafeId(allHodnotenia, kaviarenId))),
+                    String.valueOf(getMyRateByCafeId(allHodnotenia, kaviarenId) <= 0 ? "" : (getMyRateByCafeId(allHodnotenia, kaviarenId))),
                     getMyCommentByCafeId(allHodnotenia, kaviarenId)));
         }
 
@@ -213,7 +211,7 @@ public class CustomerPageController {
                 .collect(Collectors.toList());
 
         Hodnotenie hodnotenie;
-        if (myRating.isEmpty()){
+        if (myRating.isEmpty()) {
             System.out.println("myRating is empty, inserting new instance");
             hodnotenie = new Hodnotenie();
             hodnotenie.setName("");
@@ -257,7 +255,7 @@ public class CustomerPageController {
 
     }
 
-    public static class MyTableData{
+    public static class MyTableData {
 
         private final SimpleStringProperty id;
         private final SimpleStringProperty name;
@@ -283,11 +281,11 @@ public class CustomerPageController {
             this.id.set(id);
         }
 
-        public String getName(){
+        public String getName() {
             return name.get();
         }
 
-        public void setName(String name){
+        public void setName(String name) {
             this.name.set(name);
         }
 
