@@ -1,6 +1,8 @@
 package sk.stuba.fiit.scenes;
 
+import javafx.beans.property.SimpleBooleanProperty;
 import javafx.beans.property.SimpleStringProperty;
+import javafx.beans.value.ChangeListener;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -59,18 +61,44 @@ public class GuestPageController {
     private void initialize(){
         adresa_textfield.setEditable(false);
 
+        ObservableList<TableData> tableDate = getTableDate();
+
+        initTableView(tableDate);
+
+        send_rating_button.setOnMouseClicked(event -> sendMyRating(Integer.valueOf(my_rate.getText()), tableDate));
+
+        adresa_textfield.textProperty().addListener((observable, oldValue, newValue) -> {
+            info_label.setVisible(false);
+            comment_textarea.setText("");
+            my_rate.setText("");
+        });
+
+        info_label.setVisible(false);
+
+        back_button.setOnMouseClicked(event -> {
+            String fxmlPath = "/LoginPage.fxml";
+            creteNewWindow(fxmlPath);
+        });
+
+        my_rate.textProperty().addListener((observable, oldValue, newValue) -> {
+            if (!newValue.isEmpty() && newValue.matches("[1-5]")) {
+                my_rate.setText(newValue);
+            }else
+                my_rate.setText("");
+        });
+
         TableColumn adresa_column = new TableColumn("Adresa");
         adresa_column.setCellValueFactory(new PropertyValueFactory<TableData, String>("adresa"));
 
         TableColumn name_column = new TableColumn("Meno");
         name_column.setCellValueFactory(new PropertyValueFactory<TableData, String>("name"));
 
-        //ObservableList<TableData> result = FXCollections.observableArrayList(new TableData("0", "asdasd"));
-        cafes_table.setItems(getTableDate());
-        cafes_table.getColumns().addAll(adresa_column, name_column);
+        TableColumn my_rating_column = new TableColumn("Moje hodnotenie");
+        my_rating_column.setCellValueFactory(new PropertyValueFactory<TableData, String>("myHodnotenie"));
+        cafes_table.getColumns().addAll(adresa_column, name_column, my_rating_column);
 
         cafes_table.setRowFactory(tv -> {
-            TableRow<TableData> row = new TableRow();
+            TableRow<TableData> row = new TableRow<>();
             row.setOnMouseClicked(event -> {
                 if (! row.isEmpty() && event.getButton()== MouseButton.PRIMARY
                         && event.getClickCount() == 2) {
@@ -83,24 +111,30 @@ public class GuestPageController {
             return row ;
         });
 
-        send_rating_button.setOnMouseClicked(event -> {
-            sendMyRating(Integer.valueOf(my_rate.getText()));
-        });
+    }
 
-        adresa_textfield.textProperty().addListener((observable, oldValue, newValue) -> {
-            info_label.setVisible(false);
-        });
-
-        info_label.setVisible(false);
-
-        back_button.setOnMouseClicked(event -> {
-            String fxmlPath = "/LoginPage.fxml";
-            creteNewWindow(fxmlPath);
-        });
+    private void initTableView(ObservableList<TableData> tableDate){
+        cafes_table.getItems().clear();
+        //cafes_table.getColumns().clear();
+        cafes_table.setItems(tableDate);
 
     }
 
-    private void sendMyRating(int rating){
+    private void sendMyRating(int rating, ObservableList<TableData> tableDate){
+        for (TableData tableData : tableDate) {
+            if (tableData.getId().equalsIgnoreCase(String.valueOf(cafe_id)) && tableData.getBolHodnoteny()){
+                info_label.setText("Kaviareň už bola raz hodnotená.");
+                info_label.setVisible(true);
+                return;
+            }
+        }
+
+        if (my_rate.getText().isEmpty()){
+            info_label.setText("Vyplňte hodnotenie!");
+            info_label.setVisible(true);
+            return;
+        }
+
         Team076HodnotenieService service = new Team076HodnotenieService();
         Team076HodnoteniePortType port = service.getTeam076HodnoteniePort();
 
@@ -121,7 +155,16 @@ public class GuestPageController {
 
         port.insert("076", "GS3kMb", hodnotenie);
         info_label.setVisible(true);
-        info_label.setText("Uspesne");
+        info_label.setText("Hodnotenie prebehlo úspešne");
+
+        for (TableData tableData : tableDate) {
+            if (tableData.getId().equalsIgnoreCase(String.valueOf(cafe_id))) {
+                tableData.setBolHodnoteny(true);
+                tableData.setMyHodnotenie(String.valueOf(rating));
+                break;
+            }
+        }
+
     }
 
     private ObservableList<TableData> getTableDate(){
@@ -145,8 +188,8 @@ public class GuestPageController {
             if (collect.size()>0)
                 average = (double) sum / collect.size();
 
-
-            result.add(new TableData(String.valueOf(kaviaren.getId()),kaviaren.getName(), kaviaren.getAdresa(), String.valueOf(average)));
+            result.add(new TableData(String.valueOf(kaviaren.getId()),kaviaren.getName(),
+                    kaviaren.getAdresa(), String.valueOf(average), false));
         }
 
         return result;
@@ -158,12 +201,16 @@ public class GuestPageController {
         private final SimpleStringProperty name;
         private final SimpleStringProperty  adresa;
         private final SimpleStringProperty  hodnotenie;
+        private final SimpleBooleanProperty bolHodnoteny;
+        private final SimpleStringProperty myHodnotenie;
 
-        TableData(String id, String name, String adresa, String hodnotenie) {
+        TableData(String id, String name, String adresa, String hodnotenie, Boolean bolHodnoteny) {
             this.id = new SimpleStringProperty(id);
             this.adresa = new SimpleStringProperty(adresa);
             this.hodnotenie = new SimpleStringProperty(hodnotenie);
             this.name = new SimpleStringProperty(name);
+            this.bolHodnoteny = new SimpleBooleanProperty(bolHodnoteny);
+            this.myHodnotenie = new SimpleStringProperty();
         }
 
         public String getId() {
@@ -196,6 +243,22 @@ public class GuestPageController {
 
         public void setName(String name){
             this.name.set(name);
+        }
+
+        public Boolean getBolHodnoteny() {
+            return bolHodnoteny.get();
+        }
+
+        public void setBolHodnoteny(Boolean bolHodnoteny) {
+            this.bolHodnoteny.set(bolHodnoteny);
+        }
+
+        public String getMyHodnotenie() {
+            return myHodnotenie.get();
+        }
+
+        public void setMyHodnotenie(String hodnotenie) {
+            this.myHodnotenie.set(hodnotenie);
         }
     }
 
