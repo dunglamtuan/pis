@@ -8,6 +8,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
@@ -34,13 +35,13 @@ public class AdminCafeDetailPageController {
     TableView<CafeRateData> all_rate_tableview;
 
     @FXML
-    TextField name_textfield;
+    Label name_label;
 
     @FXML
-    TextField adress_textfield;
+    Label adress_label;
 
     @FXML
-    TextField average_textfield;
+    Label average_label;
 
     @FXML
     Button back_button;
@@ -48,10 +49,6 @@ public class AdminCafeDetailPageController {
     @FXML
     public void initialize(int cafeid){
         this.cafeid = cafeid;
-
-        name_textfield.setEditable(false);
-        adress_textfield.setEditable(false);
-        average_textfield.setEditable(false);
 
         back_button.setOnMouseClicked(event -> backToAdminPage("/AdminPage.fxml"));
 
@@ -150,9 +147,9 @@ public class AdminCafeDetailPageController {
         Team076KaviarenPortType kaviarenPort = kaviarenService.getTeam076KaviarenPort();
 
         Kaviaren byId = kaviarenPort.getById(this.cafeid);
-        name_textfield.setText(byId.getName());
-        adress_textfield.setText(byId.getAdresa());
-        average_textfield.setText(String.valueOf(average));
+        name_label.setText(byId.getName());
+        adress_label.setText(byId.getAdresa());
+        average_label.setText(String.valueOf(average));
     }
 
     private void backToAdminPage(String fxmlPath) {
