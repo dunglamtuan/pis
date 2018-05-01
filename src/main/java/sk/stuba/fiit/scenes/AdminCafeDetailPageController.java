@@ -23,9 +23,13 @@ import sk.stuba.fiit.labss2.pis.students.team076hodnotenie.types.Hodnotenies;
 import sk.stuba.fiit.labss2.pis.students.team076kaviaren.Team076KaviarenPortType;
 import sk.stuba.fiit.labss2.pis.students.team076kaviaren.Team076KaviarenService;
 import sk.stuba.fiit.labss2.pis.students.team076kaviaren.types.Kaviaren;
+import sk.stuba.fiit.labss2.pis.students.team076zakaznik.Team076ZakaznikPortType;
+import sk.stuba.fiit.labss2.pis.students.team076zakaznik.Team076ZakaznikService;
+import sk.stuba.fiit.labss2.pis.students.team076zakaznik.types.Zakazniks;
 
 import java.io.IOException;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class AdminCafeDetailPageController {
 
@@ -56,6 +60,10 @@ public class AdminCafeDetailPageController {
     }
 
     private void initData() {
+        Team076ZakaznikService zakaznikService = new Team076ZakaznikService();
+        Team076ZakaznikPortType zakaznikPort = zakaznikService.getTeam076ZakaznikPort();
+        List<Zakazniks> zakaznikAllList = zakaznikPort.getAll().getZakaznik();
+
         Team076HodnotenieService hodnotenieService = new Team076HodnotenieService();
         Team076HodnoteniePortType hodnoteniePort = hodnotenieService.getTeam076HodnoteniePort();
         ArrayOfHodnotenies allKaviarenById =
@@ -64,7 +72,16 @@ public class AdminCafeDetailPageController {
 
         ObservableList<CafeRateData> result = FXCollections.observableArrayList();
         for (Hodnotenies hodnotenie : hodnoteniaList) {
-            result.add(new CafeRateData(String.valueOf(hodnotenie.getZakaznikId()),
+            String customerName;
+            if (hodnotenie.getZakaznikId()<=0) {
+                customerName = "Anonym";
+            } else {
+                customerName = zakaznikAllList.stream()
+                        .filter(zakaznik -> zakaznik.getId() == hodnotenie.getZakaznikId())
+                        .map(Zakazniks::getName).collect(Collectors.toList()).get(0);
+            }
+
+            result.add(new CafeRateData(customerName,
                     String.valueOf(hodnotenie.getHodnota()),
                     hodnotenie.getDatumPridania()!= null ? String.valueOf(hodnotenie.getDatumPridania()) : "",
                     hodnotenie.getKomentar()));
@@ -84,7 +101,7 @@ public class AdminCafeDetailPageController {
 
         TableColumn comment_column = new TableColumn("Komentar");
         comment_column.setPrefWidth(all_rate_tableview.getPrefWidth()/4);
-        date_column.setCellValueFactory(new PropertyValueFactory<CafeRateData, String>("komentar"));
+        comment_column.setCellValueFactory(new PropertyValueFactory<CafeRateData, String>("komentar"));
 
         all_rate_tableview.setItems(result);
         all_rate_tableview.getColumns().addAll(zakaznik_column, hodnota_column, date_column, comment_column);
