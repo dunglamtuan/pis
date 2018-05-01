@@ -74,9 +74,9 @@ public class AddToCardPageController {
                 addTCard(cardid_input);
 
                 Alert alert = new Alert(Alert.AlertType.INFORMATION);
-                alert.setTitle("Vypocet zlavy");
-                alert.setHeaderText("Aktualna zlava");
-                alert.setContentText("Aktualna zlava je: "+ getDiscountRate()+"%");
+                alert.setTitle("Výpočet zľavy");
+                alert.setHeaderText("Aktuálna zľava");
+                alert.setContentText("Aktuálna zľava je: "+ getDiscountRate()+"%");
 
                 alert.showAndWait();
 
