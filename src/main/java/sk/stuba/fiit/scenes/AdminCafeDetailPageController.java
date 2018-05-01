@@ -87,7 +87,7 @@ public class AdminCafeDetailPageController {
                     hodnotenie.getKomentar()));
         }
 
-        TableColumn zakaznik_column = new TableColumn("Zakaznik");
+        TableColumn zakaznik_column = new TableColumn("Zákazník");
         zakaznik_column.setPrefWidth(all_rate_tableview.getPrefWidth()/4);
         zakaznik_column.setCellValueFactory(new PropertyValueFactory<CafeRateData, String>("zakaznikId"));
 
@@ -95,11 +95,11 @@ public class AdminCafeDetailPageController {
         hodnota_column.setPrefWidth(all_rate_tableview.getPrefWidth()/4);
         hodnota_column.setCellValueFactory(new PropertyValueFactory<CafeRateData, String>("hodnota"));
 
-        TableColumn date_column = new TableColumn("Datum pridania");
+        TableColumn date_column = new TableColumn("Dátum pridania");
         date_column.setPrefWidth(all_rate_tableview.getPrefWidth()/4);
         date_column.setCellValueFactory(new PropertyValueFactory<CafeRateData, String>("datumPridania"));
 
-        TableColumn comment_column = new TableColumn("Komentar");
+        TableColumn comment_column = new TableColumn("Komentár");
         comment_column.setPrefWidth(all_rate_tableview.getPrefWidth()/4);
         comment_column.setCellValueFactory(new PropertyValueFactory<CafeRateData, String>("komentar"));
 
@@ -166,7 +166,7 @@ public class AdminCafeDetailPageController {
         Kaviaren byId = kaviarenPort.getById(this.cafeid);
         name_label.setText(byId.getName());
         adress_label.setText(byId.getAdresa());
-        average_label.setText(String.valueOf(average));
+        average_label.setText(String.format("%.1f",average));
     }
 
     private void backToAdminPage(String fxmlPath) {

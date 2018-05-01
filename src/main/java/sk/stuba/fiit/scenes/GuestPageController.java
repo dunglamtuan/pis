@@ -40,7 +40,7 @@ public class GuestPageController {
     TableView<TableData> cafes_table;
 
     @FXML
-    TextField adresa_textfield;
+    Label adresa_label;
 
     @FXML
     TextArea comment_textarea;
@@ -59,15 +59,13 @@ public class GuestPageController {
 
     @FXML
     private void initialize(){
-        adresa_textfield.setEditable(false);
-
         ObservableList<TableData> tableDate = getTableDate();
 
         initTableView(tableDate);
 
         send_rating_button.setOnMouseClicked(event -> sendMyRating(Integer.valueOf(my_rate.getText()), tableDate));
 
-        adresa_textfield.textProperty().addListener((observable, oldValue, newValue) -> {
+        adresa_label.textProperty().addListener((observable, oldValue, newValue) -> {
             info_label.setVisible(false);
             comment_textarea.setText("");
             my_rate.setText("");
@@ -105,7 +103,7 @@ public class GuestPageController {
 
                     TableData clickedRow = row.getItem();
                     cafe_id = Integer.valueOf(clickedRow.getId());
-                    adresa_textfield.setText(clickedRow.getAdresa());
+                    adresa_label.setText(clickedRow.getAdresa());
                 }
             });
             return row ;

@@ -61,7 +61,7 @@ public class AdminPageController {
         adress_column.setPrefWidth(cafes_tableview.getPrefWidth()/3);
         adress_column.setCellValueFactory(new PropertyValueFactory<AllTableData, String>("adresa"));
 
-        TableColumn average_column = new TableColumn("Priemerne hodnotenie");
+        TableColumn average_column = new TableColumn("Priemerné hodnotenie");
         average_column.setPrefWidth(cafes_tableview.getPrefWidth()/3);
         average_column.setCellValueFactory(new PropertyValueFactory<AllTableData, String>("hodnotenie"));
 
@@ -108,7 +108,7 @@ public class AdminPageController {
                 average = (double) sum / collect.size();
 
             result.add(new AllTableData(String.valueOf(kaviaren.getId()), kaviaren.getName(),
-                    kaviaren.getAdresa(), String.valueOf(average)));
+                    kaviaren.getAdresa(), String.format("%.1f",average)));
         }
 
         return result;
@@ -162,7 +162,7 @@ public class AdminPageController {
         cafe_name_column.setPrefWidth(notification_tableview.getPrefWidth()/4);
         cafe_name_column.setCellValueFactory(new PropertyValueFactory<NotificationData, String>("cafeName"));
 
-        TableColumn customer_name_column = new TableColumn("Zakaznik");
+        TableColumn customer_name_column = new TableColumn("Zákaznik");
         customer_name_column.setPrefWidth(notification_tableview.getPrefWidth()/4);
         customer_name_column.setCellValueFactory(new PropertyValueFactory<NotificationData, String>("customerName"));
 
@@ -170,7 +170,7 @@ public class AdminPageController {
         rate_column.setPrefWidth(notification_tableview.getPrefWidth()/4);
         rate_column.setCellValueFactory(new PropertyValueFactory<NotificationData, String>("rate"));
 
-        TableColumn add_date_column = new TableColumn("Datum");
+        TableColumn add_date_column = new TableColumn("Dátum");
         add_date_column.setPrefWidth(notification_tableview.getPrefWidth()/4);
         add_date_column.setCellValueFactory(new PropertyValueFactory<NotificationData, String>("date"));
 
@@ -187,11 +187,11 @@ public class AdminPageController {
 
                     Alert alert = new Alert(Alert.AlertType.INFORMATION);
                     alert.setTitle("Hodnotenie");
-                    alert.setHeaderText("Kaviaren: " + clickedRow.getCafeName());
+                    alert.setHeaderText("Kaviareň: " + clickedRow.getCafeName());
                     String customerName = clickedRow.getCustomerName();
-                    alert.setContentText("Zakaznik: " +
+                    alert.setContentText("Zákazník: " +
                             (customerName == null || customerName.isEmpty() ? "Anonym" : customerName) + "\n"+
-                    "Komentar: " + clickedRow.getComment());
+                    "Komentár: " + clickedRow.getComment());
 
                     Optional<ButtonType> buttonType = alert.showAndWait();
 

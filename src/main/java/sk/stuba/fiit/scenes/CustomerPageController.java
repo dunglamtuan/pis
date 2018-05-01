@@ -82,7 +82,7 @@ public class CustomerPageController {
         adresa_column.setPrefWidth(my_cofes_tableview.getPrefWidth() / 4);
         adresa_column.setCellValueFactory(new PropertyValueFactory<MyTableData, String>("adresa"));
 
-        TableColumn rate_column = new TableColumn("Priemerne hodnotenie");
+        TableColumn rate_column = new TableColumn("Priemerné hodnotenie");
         rate_column.setPrefWidth(my_cofes_tableview.getPrefWidth() / 4);
         rate_column.setCellValueFactory(new PropertyValueFactory<MyTableData, String>("hodnotenie"));
 
@@ -152,7 +152,7 @@ public class CustomerPageController {
             int kaviarenId = navsteva.getKaviarenId();
             System.out.println("Primer: " + String.valueOf(getAverageByCafeId(allHodnotenia, kaviarenId)));
             result.add(new MyTableData(String.valueOf(kaviarenId), getCafeNameByCafeId(allKaviaren, kaviarenId),
-                    getCafeAddressByCafeId(allKaviaren, kaviarenId), String.valueOf(getAverageByCafeId(allHodnotenia, kaviarenId)),
+                    getCafeAddressByCafeId(allKaviaren, kaviarenId), String.format("%.1f",getAverageByCafeId(allHodnotenia, kaviarenId)),
                     String.valueOf(getMyRateByCafeId(allHodnotenia, kaviarenId) <= 0 ? "" : (getMyRateByCafeId(allHodnotenia, kaviarenId))),
                     getMyCommentByCafeId(allHodnotenia, kaviarenId)));
         }
