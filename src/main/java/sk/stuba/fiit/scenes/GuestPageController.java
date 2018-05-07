@@ -3,7 +3,6 @@ package sk.stuba.fiit.scenes;
 import javafx.application.Platform;
 import javafx.beans.property.SimpleBooleanProperty;
 import javafx.beans.property.SimpleStringProperty;
-import javafx.beans.value.ChangeListener;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -81,20 +80,19 @@ public class GuestPageController {
 
         my_rate.textProperty().addListener((observable, oldValue, newValue) -> {
             if (!newValue.matches("[1-5]")) {
-                Platform.runLater(() -> {
-                    my_rate.clear();
-                });
+                Platform.runLater(() -> my_rate.clear());
             }
         });
 
-        TableColumn adresa_column = new TableColumn("Adresa");
-        adresa_column.setCellValueFactory(new PropertyValueFactory<TableData, String>("adresa"));
+        TableColumn<TableData, String> adresa_column = new TableColumn<>("Adresa");
+        adresa_column.setCellValueFactory(new PropertyValueFactory<>("adresa"));
 
-        TableColumn name_column = new TableColumn("Meno");
-        name_column.setCellValueFactory(new PropertyValueFactory<TableData, String>("name"));
+        TableColumn<TableData, String> name_column = new TableColumn<>("Meno");
+        name_column.setCellValueFactory(new PropertyValueFactory<>("name"));
 
-        TableColumn my_rating_column = new TableColumn("Moje hodnotenie");
-        my_rating_column.setCellValueFactory(new PropertyValueFactory<TableData, String>("myHodnotenie"));
+        TableColumn<TableData, String> my_rating_column = new TableColumn<>("Moje hodnotenie");
+        my_rating_column.setCellValueFactory(new PropertyValueFactory<>("myHodnotenie"));
+
         cafes_table.getColumns().addAll(adresa_column, name_column, my_rating_column);
 
         cafes_table.setRowFactory(tv -> {
@@ -106,6 +104,7 @@ public class GuestPageController {
                     TableData clickedRow = row.getItem();
                     cafe_id = Integer.valueOf(clickedRow.getId());
                     adresa_label.setText(clickedRow.getAdresa());
+                    my_rate.setText(clickedRow.getMyHodnotenie());
                 }
             });
             return row ;
@@ -114,10 +113,18 @@ public class GuestPageController {
     }
 
     private void initTableView(ObservableList<TableData> tableDate){
-        cafes_table.getItems().clear();
-        //cafes_table.getColumns().clear();
-        cafes_table.setItems(tableDate);
 
+        ObservableList<TableData> newTableData = FXCollections.observableArrayList();
+        for (TableData data : tableDate) {
+            TableData newData = new TableData(data.getId(), data.getName(), data.getAdresa(), data.getMyHodnotenie(),
+                    data.getBolHodnoteny(), data.getMyHodnotenie());
+            newData.setMyHodnotenie(data.getMyHodnotenie());
+            newTableData.add(newData);
+        }
+
+        cafes_table.getItems().removeAll(tableDate);
+
+        cafes_table.setItems(newTableData);
     }
 
     private void sendMyRating(int rating, ObservableList<TableData> tableDate){
@@ -165,6 +172,8 @@ public class GuestPageController {
             }
         }
 
+        initTableView(tableDate);
+
     }
 
     private ObservableList<TableData> getTableDate(){
@@ -189,7 +198,7 @@ public class GuestPageController {
                 average = (double) sum / collect.size();
 
             result.add(new TableData(String.valueOf(kaviaren.getId()),kaviaren.getName(),
-                    kaviaren.getAdresa(), String.valueOf(average), false));
+                    kaviaren.getAdresa(), String.valueOf(average), false, ""));
         }
 
         return result;
@@ -204,13 +213,13 @@ public class GuestPageController {
         private final SimpleBooleanProperty bolHodnoteny;
         private final SimpleStringProperty myHodnotenie;
 
-        TableData(String id, String name, String adresa, String hodnotenie, Boolean bolHodnoteny) {
+        TableData(String id, String name, String adresa, String hodnotenie, Boolean bolHodnoteny, String mojeHodnotenie) {
             this.id = new SimpleStringProperty(id);
             this.adresa = new SimpleStringProperty(adresa);
             this.hodnotenie = new SimpleStringProperty(hodnotenie);
             this.name = new SimpleStringProperty(name);
             this.bolHodnoteny = new SimpleBooleanProperty(bolHodnoteny);
-            this.myHodnotenie = new SimpleStringProperty();
+            this.myHodnotenie = new SimpleStringProperty(mojeHodnotenie);
         }
 
         public String getId() {
