@@ -1,5 +1,6 @@
 package sk.stuba.fiit.scenes;
 
+import javafx.application.Platform;
 import javafx.beans.property.SimpleBooleanProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.value.ChangeListener;
@@ -79,10 +80,11 @@ public class GuestPageController {
         });
 
         my_rate.textProperty().addListener((observable, oldValue, newValue) -> {
-            if (!newValue.isEmpty() && newValue.matches("[1-5]")) {
-                my_rate.setText(newValue);
-            }else
-                my_rate.setText("");
+            if (!newValue.matches("[1-5]")) {
+                Platform.runLater(() -> {
+                    my_rate.clear();
+                });
+            }
         });
 
         TableColumn adresa_column = new TableColumn("Adresa");

@@ -1,5 +1,6 @@
 package sk.stuba.fiit.scenes;
 
+import javafx.application.Platform;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -127,6 +128,14 @@ public class CustomerPageController {
         back_button.setOnMouseClicked(event -> {
             String fxmlPath = "/LoginPage.fxml";
             creteNewWindow(fxmlPath);
+        });
+
+        mojehod_textfield.textProperty().addListener((observable, oldValue, newValue) -> {
+            if (!newValue.matches("[1-5]")) {
+                Platform.runLater(() -> {
+                    mojehod_textfield.clear();
+                });
+            }
         });
 
     }

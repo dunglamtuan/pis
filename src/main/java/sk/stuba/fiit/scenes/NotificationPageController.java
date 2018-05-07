@@ -1,5 +1,6 @@
 package sk.stuba.fiit.scenes;
 
+import javafx.application.Platform;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.fxml.FXML;
@@ -70,15 +71,11 @@ public class NotificationPageController {
             creteNewWindow(fxml);
         });
 
-        value_textfield.textProperty().addListener(new ChangeListener<String>() {
-            @Override
-            public void changed(ObservableValue<? extends String> observable, String oldValue,
-                                String newValue) {
-                if (!newValue.isEmpty() && newValue.matches("[1-5]")) {
-                    //if (!newValue.isEmpty())
-                        value_textfield.setText(newValue);
-                }else
-                    value_textfield.setText("");
+        value_textfield.textProperty().addListener((observable, oldValue, newValue) -> {
+            if (!newValue.matches("[1-5]")) {
+                Platform.runLater(() -> {
+                    value_textfield.clear();
+                });
             }
         });
     }
