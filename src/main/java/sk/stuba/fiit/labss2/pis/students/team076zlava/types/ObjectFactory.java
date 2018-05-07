@@ -49,6 +49,62 @@ public class ObjectFactory {
     }
 
     /**
+     * Create an instance of {@link GetByIdResponse }
+     * 
+     */
+    public GetByIdResponse createGetByIdResponse() {
+        return new GetByIdResponse();
+    }
+
+    /**
+     * Create an instance of {@link GetAll }
+     * 
+     */
+    public GetAll createGetAll() {
+        return new GetAll();
+    }
+
+    /**
+     * Create an instance of {@link InsertResponse }
+     * 
+     */
+    public InsertResponse createInsertResponse() {
+        return new InsertResponse();
+    }
+
+    /**
+     * Create an instance of {@link DeleteResponse }
+     * 
+     */
+    public DeleteResponse createDeleteResponse() {
+        return new DeleteResponse();
+    }
+
+    /**
+     * Create an instance of {@link Delete }
+     * 
+     */
+    public Delete createDelete() {
+        return new Delete();
+    }
+
+    /**
+     * Create an instance of {@link GetAllResponse }
+     * 
+     */
+    public GetAllResponse createGetAllResponse() {
+        return new GetAllResponse();
+    }
+
+    /**
+     * Create an instance of {@link GetByNumericCondition }
+     * 
+     */
+    public GetByNumericCondition createGetByNumericCondition() {
+        return new GetByNumericCondition();
+    }
+
+    /**
      * Create an instance of {@link GetByAttributeValue }
      * 
      */
@@ -65,99 +121,11 @@ public class ObjectFactory {
     }
 
     /**
-     * Create an instance of {@link GetById }
-     * 
-     */
-    public GetById createGetById() {
-        return new GetById();
-    }
-
-    /**
-     * Create an instance of {@link ArrayOfIds }
-     * 
-     */
-    public ArrayOfIds createArrayOfIds() {
-        return new ArrayOfIds();
-    }
-
-    /**
-     * Create an instance of {@link GetByIdResponse }
-     * 
-     */
-    public GetByIdResponse createGetByIdResponse() {
-        return new GetByIdResponse();
-    }
-
-    /**
-     * Create an instance of {@link Zlava }
-     * 
-     */
-    public Zlava createZlava() {
-        return new Zlava();
-    }
-
-    /**
-     * Create an instance of {@link GetAll }
-     * 
-     */
-    public GetAll createGetAll() {
-        return new GetAll();
-    }
-
-    /**
-     * Create an instance of {@link GetAllResponse }
-     * 
-     */
-    public GetAllResponse createGetAllResponse() {
-        return new GetAllResponse();
-    }
-
-    /**
-     * Create an instance of {@link Update }
-     * 
-     */
-    public Update createUpdate() {
-        return new Update();
-    }
-
-    /**
      * Create an instance of {@link Zlavas }
      * 
      */
     public Zlavas createZlavas() {
         return new Zlavas();
-    }
-
-    /**
-     * Create an instance of {@link InsertResponse }
-     * 
-     */
-    public InsertResponse createInsertResponse() {
-        return new InsertResponse();
-    }
-
-    /**
-     * Create an instance of {@link ArrayOfZlavas }
-     * 
-     */
-    public ArrayOfZlavas createArrayOfZlavas() {
-        return new ArrayOfZlavas();
-    }
-
-    /**
-     * Create an instance of {@link DeleteResponse }
-     * 
-     */
-    public DeleteResponse createDeleteResponse() {
-        return new DeleteResponse();
-    }
-
-    /**
-     * Create an instance of {@link GetByAttributeValueResponse }
-     * 
-     */
-    public GetByAttributeValueResponse createGetByAttributeValueResponse() {
-        return new GetByAttributeValueResponse();
     }
 
     /**
@@ -169,27 +137,59 @@ public class ObjectFactory {
     }
 
     /**
+     * Create an instance of {@link GetById }
+     * 
+     */
+    public GetById createGetById() {
+        return new GetById();
+    }
+
+    /**
+     * Create an instance of {@link ArrayOfZlavas }
+     * 
+     */
+    public ArrayOfZlavas createArrayOfZlavas() {
+        return new ArrayOfZlavas();
+    }
+
+    /**
+     * Create an instance of {@link GetByAttributeValueResponse }
+     * 
+     */
+    public GetByAttributeValueResponse createGetByAttributeValueResponse() {
+        return new GetByAttributeValueResponse();
+    }
+
+    /**
+     * Create an instance of {@link ArrayOfIds }
+     * 
+     */
+    public ArrayOfIds createArrayOfIds() {
+        return new ArrayOfIds();
+    }
+
+    /**
+     * Create an instance of {@link Update }
+     * 
+     */
+    public Update createUpdate() {
+        return new Update();
+    }
+
+    /**
+     * Create an instance of {@link Zlava }
+     * 
+     */
+    public Zlava createZlava() {
+        return new Zlava();
+    }
+
+    /**
      * Create an instance of {@link GetByNumericConditionResponse }
      * 
      */
     public GetByNumericConditionResponse createGetByNumericConditionResponse() {
         return new GetByNumericConditionResponse();
-    }
-
-    /**
-     * Create an instance of {@link Delete }
-     * 
-     */
-    public Delete createDelete() {
-        return new Delete();
-    }
-
-    /**
-     * Create an instance of {@link GetByNumericCondition }
-     * 
-     */
-    public GetByNumericCondition createGetByNumericCondition() {
-        return new GetByNumericCondition();
     }
 
     /**

@@ -49,75 +49,19 @@ public class ObjectFactory {
     }
 
     /**
-     * Create an instance of {@link GetByIdResponse }
+     * Create an instance of {@link DeleteResponse }
      * 
      */
-    public GetByIdResponse createGetByIdResponse() {
-        return new GetByIdResponse();
+    public DeleteResponse createDeleteResponse() {
+        return new DeleteResponse();
     }
 
     /**
-     * Create an instance of {@link GetByNumericConditionResponse }
+     * Create an instance of {@link GetAllResponse }
      * 
      */
-    public GetByNumericConditionResponse createGetByNumericConditionResponse() {
-        return new GetByNumericConditionResponse();
-    }
-
-    /**
-     * Create an instance of {@link GetByNumericCondition }
-     * 
-     */
-    public GetByNumericCondition createGetByNumericCondition() {
-        return new GetByNumericCondition();
-    }
-
-    /**
-     * Create an instance of {@link ArrayOfIds }
-     * 
-     */
-    public ArrayOfIds createArrayOfIds() {
-        return new ArrayOfIds();
-    }
-
-    /**
-     * Create an instance of {@link GetAll }
-     * 
-     */
-    public GetAll createGetAll() {
-        return new GetAll();
-    }
-
-    /**
-     * Create an instance of {@link Majitel }
-     * 
-     */
-    public Majitel createMajitel() {
-        return new Majitel();
-    }
-
-    /**
-     * Create an instance of {@link GetByAttributeValueResponse }
-     * 
-     */
-    public GetByAttributeValueResponse createGetByAttributeValueResponse() {
-        return new GetByAttributeValueResponse();
-    }
-
-    /**
-     * Create an instance of {@link Update }
-     * 
-     */
-    public Update createUpdate() {
-        return new Update();
-    }
-
-    /**
-     * Create an instance of {@link Delete }
-     * 
-     */
-    public Delete createDelete() {
-        return new Delete();
+    public GetAllResponse createGetAllResponse() {
+        return new GetAllResponse();
     }
 
     /**
@@ -129,11 +73,19 @@ public class ObjectFactory {
     }
 
     /**
-     * Create an instance of {@link DeleteResponse }
+     * Create an instance of {@link Majitels }
      * 
      */
-    public DeleteResponse createDeleteResponse() {
-        return new DeleteResponse();
+    public Majitels createMajitels() {
+        return new Majitels();
+    }
+
+    /**
+     * Create an instance of {@link GetById }
+     * 
+     */
+    public GetById createGetById() {
+        return new GetById();
     }
 
     /**
@@ -145,11 +97,43 @@ public class ObjectFactory {
     }
 
     /**
-     * Create an instance of {@link GetAllResponse }
+     * Create an instance of {@link GetByIdResponse }
      * 
      */
-    public GetAllResponse createGetAllResponse() {
-        return new GetAllResponse();
+    public GetByIdResponse createGetByIdResponse() {
+        return new GetByIdResponse();
+    }
+
+    /**
+     * Create an instance of {@link Majitel }
+     * 
+     */
+    public Majitel createMajitel() {
+        return new Majitel();
+    }
+
+    /**
+     * Create an instance of {@link Delete }
+     * 
+     */
+    public Delete createDelete() {
+        return new Delete();
+    }
+
+    /**
+     * Create an instance of {@link GetByAttributeValueResponse }
+     * 
+     */
+    public GetByAttributeValueResponse createGetByAttributeValueResponse() {
+        return new GetByAttributeValueResponse();
+    }
+
+    /**
+     * Create an instance of {@link GetByNumericCondition }
+     * 
+     */
+    public GetByNumericCondition createGetByNumericCondition() {
+        return new GetByNumericCondition();
     }
 
     /**
@@ -169,27 +153,43 @@ public class ObjectFactory {
     }
 
     /**
-     * Create an instance of {@link GetById }
-     * 
-     */
-    public GetById createGetById() {
-        return new GetById();
-    }
-
-    /**
-     * Create an instance of {@link Majitels }
-     * 
-     */
-    public Majitels createMajitels() {
-        return new Majitels();
-    }
-
-    /**
      * Create an instance of {@link GetByAttributeValue }
      * 
      */
     public GetByAttributeValue createGetByAttributeValue() {
         return new GetByAttributeValue();
+    }
+
+    /**
+     * Create an instance of {@link GetAll }
+     * 
+     */
+    public GetAll createGetAll() {
+        return new GetAll();
+    }
+
+    /**
+     * Create an instance of {@link Update }
+     * 
+     */
+    public Update createUpdate() {
+        return new Update();
+    }
+
+    /**
+     * Create an instance of {@link GetByNumericConditionResponse }
+     * 
+     */
+    public GetByNumericConditionResponse createGetByNumericConditionResponse() {
+        return new GetByNumericConditionResponse();
+    }
+
+    /**
+     * Create an instance of {@link ArrayOfIds }
+     * 
+     */
+    public ArrayOfIds createArrayOfIds() {
+        return new ArrayOfIds();
     }
 
     /**

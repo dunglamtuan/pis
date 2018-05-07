@@ -37,14 +37,6 @@ public class ObjectFactory {
     }
 
     /**
-     * Create an instance of {@link ValidatePhone }
-     * 
-     */
-    public ValidatePhone createValidatePhone() {
-        return new ValidatePhone();
-    }
-
-    /**
      * Create an instance of {@link ValidateEmail }
      * 
      */
@@ -58,6 +50,14 @@ public class ObjectFactory {
      */
     public ValidatePhoneResponse createValidatePhoneResponse() {
         return new ValidatePhoneResponse();
+    }
+
+    /**
+     * Create an instance of {@link ValidatePhone }
+     * 
+     */
+    public ValidatePhone createValidatePhone() {
+        return new ValidatePhone();
     }
 
     /**

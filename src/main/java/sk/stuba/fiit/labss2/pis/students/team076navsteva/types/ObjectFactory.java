@@ -49,67 +49,11 @@ public class ObjectFactory {
     }
 
     /**
-     * Create an instance of {@link Navstevas }
-     * 
-     */
-    public Navstevas createNavstevas() {
-        return new Navstevas();
-    }
-
-    /**
-     * Create an instance of {@link DeleteResponse }
-     * 
-     */
-    public DeleteResponse createDeleteResponse() {
-        return new DeleteResponse();
-    }
-
-    /**
-     * Create an instance of {@link GetByNumericConditionResponse }
-     * 
-     */
-    public GetByNumericConditionResponse createGetByNumericConditionResponse() {
-        return new GetByNumericConditionResponse();
-    }
-
-    /**
-     * Create an instance of {@link Insert }
-     * 
-     */
-    public Insert createInsert() {
-        return new Insert();
-    }
-
-    /**
-     * Create an instance of {@link Update }
-     * 
-     */
-    public Update createUpdate() {
-        return new Update();
-    }
-
-    /**
-     * Create an instance of {@link GetAll }
-     * 
-     */
-    public GetAll createGetAll() {
-        return new GetAll();
-    }
-
-    /**
      * Create an instance of {@link GetAllResponse }
      * 
      */
     public GetAllResponse createGetAllResponse() {
         return new GetAllResponse();
-    }
-
-    /**
-     * Create an instance of {@link GetByAttributeValue }
-     * 
-     */
-    public GetByAttributeValue createGetByAttributeValue() {
-        return new GetByAttributeValue();
     }
 
     /**
@@ -121,27 +65,27 @@ public class ObjectFactory {
     }
 
     /**
-     * Create an instance of {@link GetByNumericCondition }
+     * Create an instance of {@link GetByAttributeValueResponse }
      * 
      */
-    public GetByNumericCondition createGetByNumericCondition() {
-        return new GetByNumericCondition();
+    public GetByAttributeValueResponse createGetByAttributeValueResponse() {
+        return new GetByAttributeValueResponse();
     }
 
     /**
-     * Create an instance of {@link ArrayOfNavstevas }
+     * Create an instance of {@link DeleteResponse }
      * 
      */
-    public ArrayOfNavstevas createArrayOfNavstevas() {
-        return new ArrayOfNavstevas();
+    public DeleteResponse createDeleteResponse() {
+        return new DeleteResponse();
     }
 
     /**
-     * Create an instance of {@link GetById }
+     * Create an instance of {@link Update }
      * 
      */
-    public GetById createGetById() {
-        return new GetById();
+    public Update createUpdate() {
+        return new Update();
     }
 
     /**
@@ -153,27 +97,19 @@ public class ObjectFactory {
     }
 
     /**
-     * Create an instance of {@link Navsteva }
+     * Create an instance of {@link GetByNumericCondition }
      * 
      */
-    public Navsteva createNavsteva() {
-        return new Navsteva();
+    public GetByNumericCondition createGetByNumericCondition() {
+        return new GetByNumericCondition();
     }
 
     /**
-     * Create an instance of {@link ArrayOfIds }
+     * Create an instance of {@link GetByAttributeValue }
      * 
      */
-    public ArrayOfIds createArrayOfIds() {
-        return new ArrayOfIds();
-    }
-
-    /**
-     * Create an instance of {@link GetByAttributeValueResponse }
-     * 
-     */
-    public GetByAttributeValueResponse createGetByAttributeValueResponse() {
-        return new GetByAttributeValueResponse();
+    public GetByAttributeValue createGetByAttributeValue() {
+        return new GetByAttributeValue();
     }
 
     /**
@@ -185,11 +121,75 @@ public class ObjectFactory {
     }
 
     /**
+     * Create an instance of {@link GetAll }
+     * 
+     */
+    public GetAll createGetAll() {
+        return new GetAll();
+    }
+
+    /**
+     * Create an instance of {@link GetByNumericConditionResponse }
+     * 
+     */
+    public GetByNumericConditionResponse createGetByNumericConditionResponse() {
+        return new GetByNumericConditionResponse();
+    }
+
+    /**
+     * Create an instance of {@link ArrayOfNavstevas }
+     * 
+     */
+    public ArrayOfNavstevas createArrayOfNavstevas() {
+        return new ArrayOfNavstevas();
+    }
+
+    /**
+     * Create an instance of {@link ArrayOfIds }
+     * 
+     */
+    public ArrayOfIds createArrayOfIds() {
+        return new ArrayOfIds();
+    }
+
+    /**
+     * Create an instance of {@link Navstevas }
+     * 
+     */
+    public Navstevas createNavstevas() {
+        return new Navstevas();
+    }
+
+    /**
+     * Create an instance of {@link Navsteva }
+     * 
+     */
+    public Navsteva createNavsteva() {
+        return new Navsteva();
+    }
+
+    /**
      * Create an instance of {@link Delete }
      * 
      */
     public Delete createDelete() {
         return new Delete();
+    }
+
+    /**
+     * Create an instance of {@link Insert }
+     * 
+     */
+    public Insert createInsert() {
+        return new Insert();
+    }
+
+    /**
+     * Create an instance of {@link GetById }
+     * 
+     */
+    public GetById createGetById() {
+        return new GetById();
     }
 
     /**
