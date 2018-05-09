@@ -25,3 +25,11 @@ Use Intellij IDEA
 2. Run sk.stuba.fiit.scenes.Launcher for customer and worker pages
 2a.Run sk.softec.fiit.scenes.AdminLauncher for admin pages
 ```
+
+Users for testing
+```
+Customer
+    666/asdf
+Worker
+    174303/12345
+```
